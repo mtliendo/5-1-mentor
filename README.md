@@ -108,8 +108,8 @@ Until Auth0 + Neon env vars exist, the homepage guest session is local and quiz/
 
 ### Test signed-in prefs / progress
 
-1. Copy `.env.example` to `.env.local` and inject `AUTH0_SECRET`, `AUTH0_CLIENT_SECRET`, and `DATABASE_URL` (do not invent values).
-2. `npm run dev` → header **Email** or **Google** → Auth0 → callback `/auth/callback`.
+1. Copy `.env.example` to `.env.local` and inject `AUTH0_SECRET`, `AUTH0_CLIENT_SECRET`, and `DATABASE_URL` (do not invent values). Side Quests injects these on Vercel for `https://5-1-mentor.vercel.app`.
+2. `npm run dev` → header **Email** or **Google** → Auth0 → callback `/auth/callback` (production: `https://5-1-mentor.vercel.app/auth/callback`).
 3. Explore: toggle libero, edit a player name, change rotation/mode/passing look. Reload — values should return.
 4. Guided: open a later lesson, reload `/guided` — resume that lesson.
 5. Quiz: finish a run, reload — best score should persist.
