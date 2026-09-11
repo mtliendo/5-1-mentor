@@ -49,20 +49,20 @@ export function QuizShell() {
 
   if (done) {
     return (
-      <section className="rounded-[28px] bg-white/80 p-5">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+      <section className="rounded-[28px] bg-panel p-5 text-on-panel shadow-[0_16px_40px_rgba(0,0,0,0.25)]">
+        <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-accent">
           Quiz
         </p>
-        <h2 className="font-playbook mt-1 text-3xl">
+        <h2 className="font-playbook mt-1 text-5xl">
           {score}/{QUIZ_QUESTIONS.length}
         </h2>
-        <p className="mt-2 text-sm text-ink-soft">{resultCopy}</p>
+        <p className="mt-2 text-sm text-on-panel-soft">{resultCopy}</p>
         {best > 0 ? (
-          <p className="mt-1 text-xs text-ink-soft">Best score: {best}</p>
+          <p className="mt-1 text-xs font-bold text-on-panel-soft">Best score: {best}</p>
         ) : null}
         <button
           type="button"
-          className="mt-5 min-h-11 w-full rounded-2xl bg-ink text-sm font-semibold text-paper"
+          className="mt-5 min-h-12 w-full rounded-2xl bg-accent text-sm font-extrabold uppercase tracking-wide text-white"
           onClick={() => {
             setIndex(0);
             setPicked(null);
@@ -77,12 +77,12 @@ export function QuizShell() {
   }
 
   return (
-    <section className="rounded-[28px] bg-white/80 p-4">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+    <section className="rounded-[28px] bg-panel p-4 text-on-panel shadow-[0_16px_40px_rgba(0,0,0,0.25)]">
+      <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-accent">
         Question {index + 1} / {QUIZ_QUESTIONS.length}
         {remaining > 0 && picked ? ` · ${remaining} left after this` : ""}
       </p>
-      <h2 className="font-playbook mt-2 text-2xl leading-tight">{question.prompt}</h2>
+      <h2 className="font-playbook mt-2 text-3xl leading-tight">{question.prompt}</h2>
       <ul className="mt-4 space-y-2">
         {question.choices.map((choice) => {
           const isPicked = picked === choice.id;
@@ -93,12 +93,12 @@ export function QuizShell() {
               <button
                 type="button"
                 onClick={() => choose(choice.id)}
-                className={`min-h-12 w-full rounded-2xl px-3 py-3 text-left text-sm font-medium ${
+                className={`min-h-12 w-full rounded-2xl px-3 py-3 text-left text-sm font-bold ${
                   show && isCorrect
-                    ? "bg-court text-line"
+                    ? "bg-court text-paper"
                     : show && isPicked
                       ? "bg-libero text-white"
-                      : "bg-paper-deep text-ink hover:bg-paper"
+                      : "bg-paper-deep text-ink hover:bg-court-deep"
                 }`}
               >
                 {choice.label}
@@ -111,7 +111,7 @@ export function QuizShell() {
         <button
           type="button"
           onClick={advance}
-          className="mt-4 min-h-11 w-full rounded-2xl bg-ink text-sm font-semibold text-paper"
+          className="mt-4 min-h-12 w-full rounded-2xl bg-accent text-sm font-extrabold uppercase tracking-wide text-white"
         >
           {index === QUIZ_QUESTIONS.length - 1 ? "See score" : "Next"}
         </button>

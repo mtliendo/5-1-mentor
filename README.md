@@ -109,8 +109,9 @@ Until Auth0 + Neon env vars exist, the homepage guest session is local and quiz/
 ### Test signed-in prefs / progress
 
 1. Copy `.env.example` to `.env.local` and inject `AUTH0_SECRET`, `AUTH0_CLIENT_SECRET`, and `DATABASE_URL` (do not invent values). Side Quests injects these on Vercel for `https://5-1-mentor.vercel.app`.
-2. `npm run dev` → header **Email** or **Google** → Auth0 → callback `/auth/callback` (production: `https://5-1-mentor.vercel.app/auth/callback`).
-3. Explore: toggle libero, edit a player name, change rotation/mode/passing look. Reload — values should return.
-4. Guided: open a later lesson, reload `/guided` — resume that lesson.
-5. Quiz: finish a run, reload — best score should persist.
+2. `npm run dev` or open production `https://5-1-mentor.vercel.app`. Header **Sign in** (home also has Email / Google) → Auth0 → callback `/auth/callback` (prod: `https://5-1-mentor.vercel.app/auth/callback`).
+3. Explore: toggle libero, edit a player name (always-visible **Name your lineup**), change rotation/mode/passing look. Reload — values should return.
+4. Guided: open a later lesson, reload `/guided` — same lesson.
+5. Quiz: finish a run, reload — best score persists.
 6. Sign out — guest mode uses `localStorage` only; `/api/me/*` returns 401.
+7. Desktop: Explore should show court and rotation/mode controls in one viewport (no scroll ping-pong). Passing looks show coach-language help.

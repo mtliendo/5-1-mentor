@@ -6,7 +6,7 @@ export default function ExplorePage() {
 
   return (
     <div className="space-y-3">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+      <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-line">
         Free explore
       </p>
       <StudyBoard rotations={rotations} />

@@ -14,9 +14,9 @@ export function Court({
   return (
     <section
       aria-label="Half court, net at the top"
-      className="overflow-hidden rounded-[28px] border border-court-deep/40 bg-court-deep shadow-[0_18px_40px_rgba(20,35,28,0.18)]"
+      className="mx-auto w-full max-w-[36rem] overflow-hidden rounded-[28px] border-2 border-line/70 bg-court-deep shadow-[0_22px_50px_rgba(0,0,0,0.4)] lg:max-w-[min(32rem,calc(100vh-12rem))]"
     >
-      <div className="flex items-center justify-between px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-line/80">
+      <div className="flex items-center justify-between px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.18em] text-line">
         <span>Net</span>
         <span>Our half</span>
       </div>
@@ -32,36 +32,36 @@ export function Court({
             width="94"
             height="94"
             fill="none"
-            stroke="#efe8d2"
-            strokeWidth="1.6"
+            stroke="#e8ff57"
+            strokeWidth="1.8"
           />
           <line
             x1="3"
             y1="34"
             x2="97"
             y2="34"
-            stroke="#efe8d2"
-            strokeWidth="1.2"
+            stroke="#e8ff57"
+            strokeWidth="1.4"
           />
-          <rect x="3" y="3" width="94" height="4.5" fill="#1c4633" />
+          <rect x="3" y="3" width="94" height="5" fill="#03301c" />
           <line
             x1="3"
             y1="5.2"
             x2="97"
             y2="5.2"
-            stroke="#fffaf2"
-            strokeWidth="1.4"
+            stroke="#fffdf4"
+            strokeWidth="1.8"
           />
-          <circle cx="8" cy="5.2" r="1.3" fill="#e85d04" />
-          <circle cx="92" cy="5.2" r="1.3" fill="#e85d04" />
+          <circle cx="8" cy="5.2" r="1.5" fill="#ff3b00" />
+          <circle cx="92" cy="5.2" r="1.5" fill="#ff3b00" />
           <text
             x="50"
             y="31"
             textAnchor="middle"
-            fill="#efe8d2"
-            fontSize="3.4"
-            letterSpacing="0.4"
-            opacity="0.7"
+            fill="#e8ff57"
+            fontSize="3.6"
+            fontWeight="700"
+            letterSpacing="0.5"
           >
             ATTACK LINE
           </text>

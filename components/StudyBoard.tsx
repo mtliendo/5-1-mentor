@@ -170,69 +170,78 @@ export function StudyBoard({
     });
   }
 
+  const controls = (
+    <BoardControls
+      rotation={rotationId}
+      mode={mode}
+      passingId={passingId}
+      passingAlternates={alternates}
+      liberoOn={liberoOn}
+      overlay={overlay}
+      playing={playing}
+      stepLabel={step?.label ?? "—"}
+      stepIndex={safeIndex}
+      stepCount={steps.length}
+      roleNames={roleNames}
+      onRoleName={changeRoleName}
+      onRotation={changeRotation}
+      onMode={changeMode}
+      onPassing={(id) => {
+        setPassingId(id);
+        setStepIndex(0);
+        setPlaying(false);
+      }}
+      onLibero={setLiberoOn}
+      onOverlay={setOverlay}
+      onPrev={() => {
+        setPlaying(false);
+        setStepIndex((current) => Math.max(0, current - 1));
+      }}
+      onNext={() => {
+        setPlaying(false);
+        setStepIndex((current) => Math.min(steps.length - 1, current + 1));
+      }}
+      onPlayAll={() => {
+        if (playing) {
+          setPlaying(false);
+          return;
+        }
+        if (safeIndex >= steps.length - 1) setStepIndex(0);
+        setPlaying(true);
+      }}
+      onReset={() => {
+        setPlaying(false);
+        setStepIndex(0);
+      }}
+    />
+  );
+
   return (
-    <div className="space-y-4">
-      <div>
-        <p className="font-playbook text-2xl leading-tight">{rotation.title}</p>
-        <p className="mt-1 text-sm text-ink-soft">{rotation.summary}</p>
-        <p className="mt-2 text-xs text-ink-soft/80">{rotation.notes}</p>
+    <div className="space-y-4 lg:grid lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start lg:gap-5 lg:space-y-0">
+      <div className="space-y-3">
+        <div>
+          <p className="font-playbook text-3xl leading-tight text-white lg:text-4xl">
+            {rotation.title}
+          </p>
+          <p className="mt-1 text-sm font-medium text-ink-soft">{rotation.summary}</p>
+        </div>
+
+        <Court
+          players={players}
+          overlay={overlay}
+          reducedMotion={reducedMotion}
+        />
+
+        {step ? (
+          <p className="rounded-2xl bg-accent px-3 py-2 text-sm font-semibold text-white">
+            <span className="font-extrabold">{step.label}.</span> {step.cue}
+          </p>
+        ) : null}
       </div>
 
-      <Court
-        players={players}
-        overlay={overlay}
-        reducedMotion={reducedMotion}
-      />
-
-      {step ? (
-        <p className="rounded-2xl bg-accent-soft px-3 py-2 text-sm text-ink">
-          <span className="font-semibold">{step.label}.</span> {step.cue}
-        </p>
-      ) : null}
-
-      <BoardControls
-        rotation={rotationId}
-        mode={mode}
-        passingId={passingId}
-        passingAlternates={alternates}
-        liberoOn={liberoOn}
-        overlay={overlay}
-        playing={playing}
-        stepLabel={step?.label ?? "—"}
-        stepIndex={safeIndex}
-        stepCount={steps.length}
-        roleNames={roleNames}
-        onRoleName={changeRoleName}
-        onRotation={changeRotation}
-        onMode={changeMode}
-        onPassing={(id) => {
-          setPassingId(id);
-          setStepIndex(0);
-          setPlaying(false);
-        }}
-        onLibero={setLiberoOn}
-        onOverlay={setOverlay}
-        onPrev={() => {
-          setPlaying(false);
-          setStepIndex((current) => Math.max(0, current - 1));
-        }}
-        onNext={() => {
-          setPlaying(false);
-          setStepIndex((current) => Math.min(steps.length - 1, current + 1));
-        }}
-        onPlayAll={() => {
-          if (playing) {
-            setPlaying(false);
-            return;
-          }
-          if (safeIndex >= steps.length - 1) setStepIndex(0);
-          setPlaying(true);
-        }}
-        onReset={() => {
-          setPlaying(false);
-          setStepIndex(0);
-        }}
-      />
+      <div className="lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
+        {controls}
+      </div>
     </div>
   );
 }
