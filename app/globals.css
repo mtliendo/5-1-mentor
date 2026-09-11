@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #14231c;
+  --ink-soft: #3d5348;
+  --paper: #f3efe4;
+  --paper-deep: #e7e0cf;
+  --court: #2b6b4c;
+  --court-deep: #1c4633;
+  --line: #efe8d2;
+  --accent: #e85d04;
+  --accent-soft: #ffedd8;
+  --chip: #fffaf2;
+  --libero: #9b2226;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-court: var(--court);
+  --color-court-deep: var(--court-deep);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-chip: var(--chip);
+  --color-libero: var(--libero);
+  --font-sans: var(--font-outfit);
+  --font-playbook: var(--font-newsreader);
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-playbook {
+  font-family: var(--font-newsreader), ui-serif, Georgia, serif;
+}
+
+.player-chip {
+  transition:
+    left 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    top 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .player-chip {
+    transition: none !important;
+  }
+}

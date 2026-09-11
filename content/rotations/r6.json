@@ -1,0 +1,733 @@
+{
+  "id": "r6",
+  "rotation": 6,
+  "title": "Rotation 6 — Setter middle back",
+  "summary": "Setter in P6. Three front-row attackers; setter starts middle back.",
+  "notes": "TODO: refine coordinates against film / coach diagrams. Values are normalized 0–1 stubs (x left→right, y net→endline).",
+  "lineup": {
+    "1": "MB2",
+    "2": "S",
+    "3": "OPP",
+    "4": "MB1",
+    "5": "OH1",
+    "6": "OH2"
+  },
+  "backRowMiddleId": "MB2",
+  "modes": {
+    "serve": {
+      "steps": [
+        {
+          "id": "base",
+          "label": "Base lineup",
+          "cue": "Hold rotational order until contact. TODO: confirm serve-foot spots.",
+          "positions": {
+            "S": {
+              "x": 0.82,
+              "y": 0.22,
+              "role": "Setter",
+              "courtPos": 2
+            },
+            "OPP": {
+              "x": 0.5,
+              "y": 0.18,
+              "role": "Opposite",
+              "courtPos": 3
+            },
+            "OH1": {
+              "x": 0.2,
+              "y": 0.76,
+              "role": "Outside",
+              "courtPos": 5
+            },
+            "OH2": {
+              "x": 0.5,
+              "y": 0.8,
+              "role": "Outside",
+              "courtPos": 6
+            },
+            "MB1": {
+              "x": 0.18,
+              "y": 0.22,
+              "role": "Middle",
+              "courtPos": 4
+            },
+            "MB2": {
+              "x": 0.82,
+              "y": 0.76,
+              "role": "Middle",
+              "courtPos": 1
+            },
+            "L": {
+              "x": 0.8,
+              "y": 0.68,
+              "role": "Libero",
+              "courtPos": 1
+            }
+          }
+        },
+        {
+          "id": "toss",
+          "label": "Serve toss",
+          "cue": "Server steps to the endline. Front row stays legal.",
+          "positions": {
+            "S": {
+              "x": 0.82,
+              "y": 0.22,
+              "role": "Setter",
+              "courtPos": 2
+            },
+            "OPP": {
+              "x": 0.5,
+              "y": 0.18,
+              "role": "Opposite",
+              "courtPos": 3
+            },
+            "OH1": {
+              "x": 0.2,
+              "y": 0.76,
+              "role": "Outside",
+              "courtPos": 5
+            },
+            "OH2": {
+              "x": 0.5,
+              "y": 0.8,
+              "role": "Outside",
+              "courtPos": 6
+            },
+            "MB1": {
+              "x": 0.18,
+              "y": 0.22,
+              "role": "Middle",
+              "courtPos": 4
+            },
+            "MB2": {
+              "x": 0.84,
+              "y": 0.9,
+              "role": "Middle",
+              "courtPos": 1
+            },
+            "L": {
+              "x": 0.8,
+              "y": 0.68,
+              "role": "Libero",
+              "courtPos": 1
+            }
+          }
+        },
+        {
+          "id": "release",
+          "label": "Release",
+          "cue": "Pins and middle start their approach once the ball is contacted.",
+          "positions": {
+            "S": {
+              "x": 0.86,
+              "y": 0.16,
+              "role": "Setter",
+              "courtPos": 2
+            },
+            "OPP": {
+              "x": 0.5,
+              "y": 0.14,
+              "role": "Opposite",
+              "courtPos": 3
+            },
+            "OH1": {
+              "x": 0.2,
+              "y": 0.76,
+              "role": "Outside",
+              "courtPos": 5
+            },
+            "OH2": {
+              "x": 0.5,
+              "y": 0.8,
+              "role": "Outside",
+              "courtPos": 6
+            },
+            "MB1": {
+              "x": 0.14,
+              "y": 0.16,
+              "role": "Middle",
+              "courtPos": 4
+            },
+            "MB2": {
+              "x": 0.86,
+              "y": 0.82,
+              "role": "Middle",
+              "courtPos": 1
+            },
+            "L": {
+              "x": 0.8,
+              "y": 0.68,
+              "role": "Libero",
+              "courtPos": 1
+            }
+          }
+        },
+        {
+          "id": "cover",
+          "label": "Cover / transition",
+          "cue": "Collapse to cover, then the setter hunts the second ball.",
+          "positions": {
+            "S": {
+              "x": 0.84,
+              "y": 0.12,
+              "role": "Setter",
+              "courtPos": 2
+            },
+            "OPP": {
+              "x": 0.5,
+              "y": 0.18,
+              "role": "Opposite",
+              "courtPos": 3
+            },
+            "OH1": {
+              "x": 0.2,
+              "y": 0.76,
+              "role": "Outside",
+              "courtPos": 5
+            },
+            "OH2": {
+              "x": 0.5,
+              "y": 0.8,
+              "role": "Outside",
+              "courtPos": 6
+            },
+            "MB1": {
+              "x": 0.16,
+              "y": 0.12,
+              "role": "Middle",
+              "courtPos": 4
+            },
+            "MB2": {
+              "x": 0.82,
+              "y": 0.76,
+              "role": "Middle",
+              "courtPos": 1
+            },
+            "L": {
+              "x": 0.8,
+              "y": 0.68,
+              "role": "Libero",
+              "courtPos": 1
+            }
+          }
+        }
+      ]
+    },
+    "serve-receive": {
+      "passingAlternates": [
+        {
+          "id": "3-person",
+          "name": "3-person",
+          "description": "Standard three-passer serve-receive.",
+          "steps": [
+            {
+              "id": "platform",
+              "label": "3-person platform",
+              "cue": "Three passers across the back. Setter hides on the right.",
+              "positions": {
+                "S": {
+                  "x": 0.88,
+                  "y": 0.26,
+                  "role": "Setter",
+                  "courtPos": 2
+                },
+                "OPP": {
+                  "x": 0.5,
+                  "y": 0.18,
+                  "role": "Opposite",
+                  "courtPos": 3
+                },
+                "OH1": {
+                  "x": 0.18,
+                  "y": 0.92,
+                  "role": "Outside",
+                  "courtPos": 5
+                },
+                "OH2": {
+                  "x": 0.52,
+                  "y": 0.92,
+                  "role": "Outside",
+                  "courtPos": 6
+                },
+                "MB1": {
+                  "x": 0.18,
+                  "y": 0.22,
+                  "role": "Middle",
+                  "courtPos": 4
+                },
+                "MB2": {
+                  "x": 0.82,
+                  "y": 0.76,
+                  "role": "Middle",
+                  "courtPos": 1
+                },
+                "L": {
+                  "x": 0.82,
+                  "y": 0.64,
+                  "role": "Libero",
+                  "courtPos": 1
+                }
+              }
+            },
+            {
+              "id": "pass",
+              "label": "Pass",
+              "cue": "Target the setter. Non-passers freeze until the platform.",
+              "positions": {
+                "S": {
+                  "x": 0.84,
+                  "y": 0.2,
+                  "role": "Setter",
+                  "courtPos": 2
+                },
+                "OPP": {
+                  "x": 0.5,
+                  "y": 0.18,
+                  "role": "Opposite",
+                  "courtPos": 3
+                },
+                "OH1": {
+                  "x": 0.2,
+                  "y": 0.76,
+                  "role": "Outside",
+                  "courtPos": 5
+                },
+                "OH2": {
+                  "x": 0.5,
+                  "y": 0.8,
+                  "role": "Outside",
+                  "courtPos": 6
+                },
+                "MB1": {
+                  "x": 0.18,
+                  "y": 0.22,
+                  "role": "Middle",
+                  "courtPos": 4
+                },
+                "MB2": {
+                  "x": 0.82,
+                  "y": 0.76,
+                  "role": "Middle",
+                  "courtPos": 1
+                },
+                "L": {
+                  "x": 0.86,
+                  "y": 0.6,
+                  "role": "Libero",
+                  "courtPos": 1
+                }
+              }
+            },
+            {
+              "id": "set",
+              "label": "Set",
+              "cue": "Setter at the net, hitters on their approach lanes.",
+              "positions": {
+                "S": {
+                  "x": 0.86,
+                  "y": 0.14,
+                  "role": "Setter",
+                  "courtPos": 2
+                },
+                "OPP": {
+                  "x": 0.5,
+                  "y": 0.12,
+                  "role": "Opposite",
+                  "courtPos": 3
+                },
+                "OH1": {
+                  "x": 0.2,
+                  "y": 0.76,
+                  "role": "Outside",
+                  "courtPos": 5
+                },
+                "OH2": {
+                  "x": 0.5,
+                  "y": 0.8,
+                  "role": "Outside",
+                  "courtPos": 6
+                },
+                "MB1": {
+                  "x": 0.14,
+                  "y": 0.14,
+                  "role": "Middle",
+                  "courtPos": 4
+                },
+                "MB2": {
+                  "x": 0.82,
+                  "y": 0.76,
+                  "role": "Middle",
+                  "courtPos": 1
+                },
+                "L": {
+                  "x": 0.8,
+                  "y": 0.68,
+                  "role": "Libero",
+                  "courtPos": 1
+                }
+              }
+            },
+            {
+              "id": "attack",
+              "label": "Attack",
+              "cue": "Pins at the antenna, middle closing. Cover behind the hitter.",
+              "positions": {
+                "S": {
+                  "x": 0.88,
+                  "y": 0.1,
+                  "role": "Setter",
+                  "courtPos": 2
+                },
+                "OPP": {
+                  "x": 0.5,
+                  "y": 0.18,
+                  "role": "Opposite",
+                  "courtPos": 3
+                },
+                "OH1": {
+                  "x": 0.2,
+                  "y": 0.76,
+                  "role": "Outside",
+                  "courtPos": 5
+                },
+                "OH2": {
+                  "x": 0.5,
+                  "y": 0.8,
+                  "role": "Outside",
+                  "courtPos": 6
+                },
+                "MB1": {
+                  "x": 0.12,
+                  "y": 0.1,
+                  "role": "Middle",
+                  "courtPos": 4
+                },
+                "MB2": {
+                  "x": 0.82,
+                  "y": 0.76,
+                  "role": "Middle",
+                  "courtPos": 1
+                },
+                "L": {
+                  "x": 0.8,
+                  "y": 0.68,
+                  "role": "Libero",
+                  "courtPos": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2-person",
+          "name": "2-person",
+          "description": "Two primary passers, everyone else pulled off.",
+          "steps": [
+            {
+              "id": "platform",
+              "label": "2-person platform",
+              "cue": "Two primary passers; others pull off the seam.",
+              "positions": {
+                "S": {
+                  "x": 0.86,
+                  "y": 0.24,
+                  "role": "Setter",
+                  "courtPos": 2
+                },
+                "OPP": {
+                  "x": 0.5,
+                  "y": 0.18,
+                  "role": "Opposite",
+                  "courtPos": 3
+                },
+                "OH1": {
+                  "x": 0.36,
+                  "y": 0.78,
+                  "role": "Outside",
+                  "courtPos": 5
+                },
+                "OH2": {
+                  "x": 0.6,
+                  "y": 0.8,
+                  "role": "Outside",
+                  "courtPos": 6
+                },
+                "MB1": {
+                  "x": 0.18,
+                  "y": 0.22,
+                  "role": "Middle",
+                  "courtPos": 4
+                },
+                "MB2": {
+                  "x": 0.82,
+                  "y": 0.76,
+                  "role": "Middle",
+                  "courtPos": 1
+                },
+                "L": {
+                  "x": 0.7,
+                  "y": 0.66,
+                  "role": "Libero",
+                  "courtPos": 1
+                }
+              }
+            },
+            {
+              "id": "pass",
+              "label": "Pass",
+              "cue": "The two-person look gives a wider swing hitter.",
+              "positions": {
+                "S": {
+                  "x": 0.84,
+                  "y": 0.22,
+                  "role": "Setter",
+                  "courtPos": 2
+                },
+                "OPP": {
+                  "x": 0.5,
+                  "y": 0.18,
+                  "role": "Opposite",
+                  "courtPos": 3
+                },
+                "OH1": {
+                  "x": 0.2,
+                  "y": 0.76,
+                  "role": "Outside",
+                  "courtPos": 5
+                },
+                "OH2": {
+                  "x": 0.5,
+                  "y": 0.8,
+                  "role": "Outside",
+                  "courtPos": 6
+                },
+                "MB1": {
+                  "x": 0.18,
+                  "y": 0.22,
+                  "role": "Middle",
+                  "courtPos": 4
+                },
+                "MB2": {
+                  "x": 0.82,
+                  "y": 0.76,
+                  "role": "Middle",
+                  "courtPos": 1
+                },
+                "L": {
+                  "x": 0.74,
+                  "y": 0.62,
+                  "role": "Libero",
+                  "courtPos": 1
+                }
+              }
+            },
+            {
+              "id": "set",
+              "label": "Set",
+              "cue": "Setter still hunts the same target — only the platform changed.",
+              "positions": {
+                "S": {
+                  "x": 0.72,
+                  "y": 0.08,
+                  "role": "Setter",
+                  "courtPos": 2
+                },
+                "OPP": {
+                  "x": 0.5,
+                  "y": 0.18,
+                  "role": "Opposite",
+                  "courtPos": 3
+                },
+                "OH1": {
+                  "x": 0.2,
+                  "y": 0.76,
+                  "role": "Outside",
+                  "courtPos": 5
+                },
+                "OH2": {
+                  "x": 0.5,
+                  "y": 0.8,
+                  "role": "Outside",
+                  "courtPos": 6
+                },
+                "MB1": {
+                  "x": 0.18,
+                  "y": 0.22,
+                  "role": "Middle",
+                  "courtPos": 4
+                },
+                "MB2": {
+                  "x": 0.82,
+                  "y": 0.76,
+                  "role": "Middle",
+                  "courtPos": 1
+                },
+                "L": {
+                  "x": 0.8,
+                  "y": 0.68,
+                  "role": "Libero",
+                  "courtPos": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "w-pass",
+          "name": "W-pass",
+          "description": "Four-player W against a tough floater.",
+          "steps": [
+            {
+              "id": "platform",
+              "label": "W-pass",
+              "cue": "Four-player W: two short, two deep. Use vs a tough floater.",
+              "positions": {
+                "S": {
+                  "x": 0.87,
+                  "y": 0.25,
+                  "role": "Setter",
+                  "courtPos": 2
+                },
+                "OPP": {
+                  "x": 0.56,
+                  "y": 0.22,
+                  "role": "Opposite",
+                  "courtPos": 3
+                },
+                "OH1": {
+                  "x": 0.22,
+                  "y": 0.84,
+                  "role": "Outside",
+                  "courtPos": 5
+                },
+                "OH2": {
+                  "x": 0.48,
+                  "y": 0.88,
+                  "role": "Outside",
+                  "courtPos": 6
+                },
+                "MB1": {
+                  "x": 0.18,
+                  "y": 0.22,
+                  "role": "Middle",
+                  "courtPos": 4
+                },
+                "MB2": {
+                  "x": 0.82,
+                  "y": 0.76,
+                  "role": "Middle",
+                  "courtPos": 1
+                },
+                "L": {
+                  "x": 0.82,
+                  "y": 0.7,
+                  "role": "Libero",
+                  "courtPos": 1
+                }
+              }
+            },
+            {
+              "id": "pass",
+              "label": "Pass",
+              "cue": "Short passers take the first third; deep passers own the endline.",
+              "positions": {
+                "S": {
+                  "x": 0.84,
+                  "y": 0.22,
+                  "role": "Setter",
+                  "courtPos": 2
+                },
+                "OPP": {
+                  "x": 0.5,
+                  "y": 0.18,
+                  "role": "Opposite",
+                  "courtPos": 3
+                },
+                "OH1": {
+                  "x": 0.2,
+                  "y": 0.76,
+                  "role": "Outside",
+                  "courtPos": 5
+                },
+                "OH2": {
+                  "x": 0.5,
+                  "y": 0.8,
+                  "role": "Outside",
+                  "courtPos": 6
+                },
+                "MB1": {
+                  "x": 0.18,
+                  "y": 0.22,
+                  "role": "Middle",
+                  "courtPos": 4
+                },
+                "MB2": {
+                  "x": 0.82,
+                  "y": 0.76,
+                  "role": "Middle",
+                  "courtPos": 1
+                },
+                "L": {
+                  "x": 0.85,
+                  "y": 0.66,
+                  "role": "Libero",
+                  "courtPos": 1
+                }
+              }
+            },
+            {
+              "id": "set",
+              "label": "Set",
+              "cue": "W folds back into a standard 5-1 attack shape.",
+              "positions": {
+                "S": {
+                  "x": 0.86,
+                  "y": 0.14,
+                  "role": "Setter",
+                  "courtPos": 2
+                },
+                "OPP": {
+                  "x": 0.5,
+                  "y": 0.18,
+                  "role": "Opposite",
+                  "courtPos": 3
+                },
+                "OH1": {
+                  "x": 0.2,
+                  "y": 0.76,
+                  "role": "Outside",
+                  "courtPos": 5
+                },
+                "OH2": {
+                  "x": 0.5,
+                  "y": 0.8,
+                  "role": "Outside",
+                  "courtPos": 6
+                },
+                "MB1": {
+                  "x": 0.14,
+                  "y": 0.14,
+                  "role": "Middle",
+                  "courtPos": 4
+                },
+                "MB2": {
+                  "x": 0.82,
+                  "y": 0.76,
+                  "role": "Middle",
+                  "courtPos": 1
+                },
+                "L": {
+                  "x": 0.8,
+                  "y": 0.68,
+                  "role": "Libero",
+                  "courtPos": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
