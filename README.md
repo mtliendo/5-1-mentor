@@ -16,7 +16,7 @@ npm run build
 npm start
 ```
 
-The UI runs without API keys; guest progress falls back to `localStorage`. Signed-in preferences and progress need Neon + Auth0 (see below).
+The UI runs without API keys; guests keep preferences and progress in `localStorage`. Signed-in users sync through `GET`/`PUT` `/api/me/preferences` and `/api/me/progress` (Auth0 session + Neon).
 
 ## What ships in this MVP
 
@@ -28,7 +28,9 @@ The UI runs without API keys; guest progress falls back to `localStorage`. Signe
 - Guided lessons, free Explore, multiple-choice Quiz
 - `prefers-reduced-motion` (no chip easing; play-all still steps)
 - `content/rotations/r1.json`–`r6.json` stubs (see TODO below)
-- `/api/progress` local hook (client `localStorage`); signed-in data is `/api/me/*`
+- Auth0 v4 login (`/auth/login`, callback `/auth/callback`) — email + Google
+- Signed-in prefs/progress at `/api/me/*`; guests stay on `localStorage`
+- Legacy `/api/progress` is a thin compatibility stub only
 
 ## Content TODO
 
@@ -101,3 +103,12 @@ Session routes are mounted by `proxy.ts` (Next.js 16 network boundary) using the
 - `GET` / `PUT` `/api/me/progress` → `{ completed, lastRotation, lastMode, lastAlternate, lastStep }`
 
 Until Auth0 + Neon env vars exist, the homepage guest session is local and quiz/guided progress stays in the browser.
+
+### Test signed-in prefs / progress
+
+1. Copy `.env.example` to `.env.local` and inject `AUTH0_SECRET`, `AUTH0_CLIENT_SECRET`, and `DATABASE_URL` (do not invent values).
+2. `npm run dev` → header **Email** or **Google** → Auth0 → callback `/auth/callback`.
+3. Explore: toggle libero, edit a player name, change rotation/mode/passing look. Reload — values should return.
+4. Guided: open a later lesson, reload `/guided` — resume that lesson.
+5. Quiz: finish a run, reload — best score should persist.
+6. Sign out — guest mode uses `localStorage` only; `/api/me/*` returns 401.

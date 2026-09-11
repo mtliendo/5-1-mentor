@@ -19,7 +19,7 @@ const PATHS = [
     href: "/quiz",
     kicker: "Check",
     title: "Quiz",
-    body: "Six multiple-choice questions. Scores stay on this device for now.",
+    body: "Six multiple-choice questions. Best score follows you when signed in.",
   },
 ] as const;
 

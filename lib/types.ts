@@ -72,12 +72,36 @@ export interface ResolvedPlayer {
   courtPos: CourtPos;
 }
 
+/** Client UI progress. Mapped to/from GET/PUT /api/me/progress via a thin adapter. */
 export interface StudyProgress {
   guidedLessonId: string;
   completedLessons: string[];
   quizBest: number;
   lastRotation: RotationId;
   lastMode: PlayMode;
+  lastAlternate: string | null;
+  lastStep: number;
+}
+
+/** Client UI preferences. Matches GET/PUT /api/me/preferences. */
+export interface StudyPreferences {
+  liberoEnabled: boolean;
+  roleNames: Record<string, string>;
+}
+
+/** Wire shape for GET/PUT /api/me/progress. */
+export interface ApiProgress {
+  completed: Record<string, unknown>;
+  lastRotation: number;
+  lastMode: PlayMode;
+  lastAlternate: string | null;
+  lastStep: number;
+}
+
+/** Wire shape for GET/PUT /api/me/preferences. */
+export interface ApiPreferences {
+  liberoEnabled: boolean;
+  roleNames: Record<string, unknown>;
 }
 
 export interface QuizChoice {

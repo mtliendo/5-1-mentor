@@ -1,16 +1,23 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { QUIZ_QUESTIONS } from "@/lib/quiz";
-import { loadProgress, persistProgress } from "@/lib/storage";
+import { persistProgress, syncProgressFromApi } from "@/lib/storage";
 
 export function QuizShell() {
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
   const [score, setScore] = useState(0);
+  const [best, setBest] = useState(0);
   const [done, setDone] = useState(false);
   const question = QUIZ_QUESTIONS[index];
   const remaining = QUIZ_QUESTIONS.length - index - (picked ? 0 : 1);
+
+  useEffect(() => {
+    void syncProgressFromApi().then((progress) => {
+      setBest(progress.quizBest);
+    });
+  }, []);
 
   const resultCopy = useMemo(() => {
     if (score === QUIZ_QUESTIONS.length) return "Clean sweep. You can coach the walkthrough.";
@@ -27,11 +34,12 @@ export function QuizShell() {
   function advance() {
     if (index === QUIZ_QUESTIONS.length - 1) {
       const nextScore = score;
-      const current = loadProgress();
-      void persistProgress({
-        ...current,
-        quizBest: Math.max(current.quizBest, nextScore),
-      });
+      void (async () => {
+        const current = await syncProgressFromApi();
+        const quizBest = Math.max(current.quizBest, nextScore);
+        await persistProgress({ quizBest });
+        setBest(quizBest);
+      })();
       setDone(true);
       return;
     }
@@ -49,6 +57,9 @@ export function QuizShell() {
           {score}/{QUIZ_QUESTIONS.length}
         </h2>
         <p className="mt-2 text-sm text-ink-soft">{resultCopy}</p>
+        {best > 0 ? (
+          <p className="mt-1 text-xs text-ink-soft">Best score: {best}</p>
+        ) : null}
         <button
           type="button"
           className="mt-5 min-h-11 w-full rounded-2xl bg-ink text-sm font-semibold text-paper"

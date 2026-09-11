@@ -5,14 +5,25 @@ import { BoardControls } from "./BoardControls";
 import { Court } from "./Court";
 import { resolveStepPlayers } from "@/lib/libero";
 import { usePrefersReducedMotion } from "@/lib/motion";
+import { applyRoleNames, getRosterPlayer } from "@/lib/roster";
 import {
   defaultPassingId,
   getActiveSteps,
   getRotation,
   listPassingAlternates,
 } from "@/lib/rotations";
-import { persistProgress, loadProgress } from "@/lib/storage";
-import type { PlayMode, RotationContent, RotationId } from "@/lib/types";
+import {
+  persistPreferences,
+  persistProgress,
+  syncPreferencesFromApi,
+  syncProgressFromApi,
+} from "@/lib/storage";
+import type {
+  PlayerId,
+  PlayMode,
+  RotationContent,
+  RotationId,
+} from "@/lib/types";
 
 export function StudyBoard({
   rotations,
@@ -41,6 +52,8 @@ export function StudyBoard({
   const [overlay, setOverlay] = useState(locked?.overlay ?? false);
   const [stepIndex, setStepIndex] = useState(locked?.stepIndex ?? 0);
   const [playing, setPlaying] = useState(false);
+  const [roleNames, setRoleNames] = useState<Record<string, string>>({});
+  const [hydrated, setHydrated] = useState(false);
 
   const rotation = getRotation(rotations, rotationId);
   const alternates = listPassingAlternates(rotation);
@@ -48,10 +61,48 @@ export function StudyBoard({
   const safeIndex = Math.min(stepIndex, Math.max(0, steps.length - 1));
   const step = steps[safeIndex];
 
-  const players = useMemo(
-    () => (step ? resolveStepPlayers(rotation, step, liberoOn) : []),
-    [rotation, step, liberoOn],
-  );
+  const players = useMemo(() => {
+    const resolved = step ? resolveStepPlayers(rotation, step, liberoOn) : [];
+    return applyRoleNames(resolved, roleNames);
+  }, [rotation, step, liberoOn, roleNames]);
+
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      const [progress, prefs] = await Promise.all([
+        syncProgressFromApi(),
+        syncPreferencesFromApi(),
+      ]);
+      if (cancelled) return;
+
+      if (!locked) {
+        const nextRotation = getRotation(rotations, progress.lastRotation);
+        const nextMode = progress.lastMode;
+        const nextAlternates = listPassingAlternates(nextRotation);
+        const nextPassing =
+          progress.lastAlternate &&
+          nextAlternates.some((item) => item.id === progress.lastAlternate)
+            ? progress.lastAlternate
+            : defaultPassingId(nextRotation);
+        const nextSteps = getActiveSteps(nextRotation, nextMode, nextPassing);
+        setRotationId(progress.lastRotation);
+        setMode(nextMode);
+        setPassingId(nextPassing);
+        setStepIndex(
+          Math.min(progress.lastStep, Math.max(0, nextSteps.length - 1)),
+        );
+      }
+
+      if (locked?.liberoOn === undefined) {
+        setLiberoOn(prefs.liberoEnabled);
+      }
+      setRoleNames(prefs.roleNames);
+      setHydrated(true);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [locked, rotations]);
 
   useEffect(() => {
     if (!playing) return;
@@ -69,13 +120,26 @@ export function StudyBoard({
   }, [playing, steps.length, reducedMotion]);
 
   useEffect(() => {
-    const current = loadProgress();
+    if (!hydrated) return;
     void persistProgress({
-      ...current,
       lastRotation: rotationId,
       lastMode: mode,
+      lastAlternate: passingId,
+      lastStep: safeIndex,
     });
-  }, [rotationId, mode]);
+  }, [hydrated, rotationId, mode, passingId, safeIndex]);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    const timer = window.setTimeout(() => {
+      const patch =
+        locked?.liberoOn === undefined
+          ? { liberoEnabled: liberoOn, roleNames }
+          : { roleNames };
+      void persistPreferences(patch);
+    }, 300);
+    return () => window.clearTimeout(timer);
+  }, [hydrated, liberoOn, roleNames, locked]);
 
   function changeRotation(id: RotationId) {
     setRotationId(id);
@@ -91,6 +155,19 @@ export function StudyBoard({
     setMode(next);
     setStepIndex(0);
     setPlaying(false);
+  }
+
+  function changeRoleName(id: PlayerId, name: string) {
+    setRoleNames((current) => {
+      const next = { ...current };
+      const fallback = getRosterPlayer(id).name;
+      if (!name || name === fallback) {
+        delete next[id];
+      } else {
+        next[id] = name;
+      }
+      return next;
+    });
   }
 
   return (
@@ -124,6 +201,8 @@ export function StudyBoard({
         stepLabel={step?.label ?? "—"}
         stepIndex={safeIndex}
         stepCount={steps.length}
+        roleNames={roleNames}
+        onRoleName={changeRoleName}
         onRotation={changeRotation}
         onMode={changeMode}
         onPassing={(id) => {

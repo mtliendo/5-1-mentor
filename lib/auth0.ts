@@ -54,6 +54,10 @@ export function getAuth0Client(): Auth0Client | null {
       clientSecret: config.clientSecret,
       domain: config.domain,
       appBaseUrl: config.appBaseUrl,
+      // Tenant is email + Google only; do not pin a single `connection` here.
+      authorizationParameters: {
+        scope: "openid profile email",
+      },
       routes: {
         login: "/auth/login",
         logout: "/auth/logout",

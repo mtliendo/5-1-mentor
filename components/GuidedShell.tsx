@@ -3,11 +3,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { StudyBoard } from "./StudyBoard";
 import { GUIDED_LESSONS } from "@/lib/guided";
-import { loadProgress, persistProgress } from "@/lib/storage";
+import { loadProgress, persistProgress, syncProgressFromApi } from "@/lib/storage";
 import type { RotationContent } from "@/lib/types";
 
 export function GuidedShell({ rotations }: { rotations: RotationContent[] }) {
   const [lessonIndex, setLessonIndex] = useState(0);
+  const [hydrated, setHydrated] = useState(false);
   const lesson = GUIDED_LESSONS[lessonIndex];
   const locked = useMemo(
     () => ({
@@ -22,15 +23,30 @@ export function GuidedShell({ rotations }: { rotations: RotationContent[] }) {
   );
 
   useEffect(() => {
+    let cancelled = false;
+    void syncProgressFromApi().then((progress) => {
+      if (cancelled) return;
+      const idx = GUIDED_LESSONS.findIndex(
+        (item) => item.id === progress.guidedLessonId,
+      );
+      if (idx >= 0) setLessonIndex(idx);
+      setHydrated(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
     const current = loadProgress();
     const completed = new Set(current.completedLessons);
     completed.add(lesson.id);
     void persistProgress({
-      ...current,
       guidedLessonId: lesson.id,
       completedLessons: Array.from(completed),
     });
-  }, [lesson.id]);
+  }, [hydrated, lesson.id]);
 
   return (
     <div className="space-y-4">

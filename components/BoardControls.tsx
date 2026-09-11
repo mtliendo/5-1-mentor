@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
+import { ROSTER } from "@/lib/roster";
 import { ROTATION_IDS } from "@/lib/rotations";
-import type { PassingAlternate, PlayMode, RotationId } from "@/lib/types";
+import type { PassingAlternate, PlayerId, PlayMode, RotationId } from "@/lib/types";
 
 function SegButton({
   active,
@@ -46,6 +47,8 @@ export function BoardControls({
   onNext,
   onPlayAll,
   onReset,
+  roleNames,
+  onRoleName,
 }: {
   rotation: RotationId;
   mode: PlayMode;
@@ -66,6 +69,8 @@ export function BoardControls({
   onNext: () => void;
   onPlayAll: () => void;
   onReset: () => void;
+  roleNames: Record<string, string>;
+  onRoleName: (id: PlayerId, name: string) => void;
 }) {
   return (
     <div className="space-y-3 rounded-[28px] bg-white/70 p-3 shadow-[0_10px_30px_rgba(20,35,28,0.06)]">
@@ -130,6 +135,31 @@ export function BoardControls({
           Overlap {overlay ? "on" : "off"}
         </SegButton>
       </div>
+
+      <details className="rounded-2xl bg-paper px-3 py-1">
+        <summary className="flex min-h-11 cursor-pointer items-center text-sm font-semibold text-ink">
+          Player names
+        </summary>
+        <ul className="mt-1 space-y-2 pb-2">
+          {ROSTER.map((player) => (
+            <li key={player.id} className="flex items-center gap-2">
+              <label
+                className="w-10 shrink-0 text-[11px] font-semibold uppercase tracking-wide text-ink-soft"
+                htmlFor={`role-name-${player.id}`}
+              >
+                {player.id}
+              </label>
+              <input
+                id={`role-name-${player.id}`}
+                value={roleNames[player.id] ?? player.name}
+                placeholder={player.defaultRole}
+                onChange={(event) => onRoleName(player.id, event.target.value)}
+                className="min-h-11 w-full rounded-xl border border-ink/10 bg-white px-3 text-sm text-ink"
+              />
+            </li>
+          ))}
+        </ul>
+      </details>
 
       <div>
         <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft">

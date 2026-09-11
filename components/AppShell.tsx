@@ -1,5 +1,9 @@
 import type { ReactNode } from "react";
+import { Suspense } from "react";
 import Link from "next/link";
+import { AuthStatus } from "./AuthStatus";
+import { isAuth0Configured } from "@/lib/auth";
+import type { SessionUser } from "@/lib/types";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -8,7 +12,13 @@ const NAV = [
   { href: "/quiz", label: "Quiz" },
 ] as const;
 
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({
+  children,
+  user,
+}: {
+  children: ReactNode;
+  user: SessionUser;
+}) {
   return (
     <div className="mx-auto flex min-h-full w-full max-w-lg flex-1 flex-col px-4 pb-24 pt-4 sm:max-w-3xl sm:pb-10">
       <header className="mb-4 flex items-end justify-between gap-3">
@@ -20,17 +30,25 @@ export function AppShell({ children }: { children: ReactNode }) {
             5-1 Mentor
           </h1>
         </Link>
-        <nav className="hidden items-center gap-1 sm:flex" aria-label="Primary">
-          {NAV.slice(1).map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-full px-3 py-2 text-sm font-medium text-ink-soft hover:bg-paper-deep hover:text-ink"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="flex shrink-0 items-end gap-2">
+          <nav className="hidden items-center gap-1 sm:flex" aria-label="Primary">
+            {NAV.slice(1).map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-full px-3 py-2 text-sm font-medium text-ink-soft hover:bg-paper-deep hover:text-ink"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <Suspense fallback={null}>
+            <AuthStatus
+              initialUser={user}
+              authConfigured={isAuth0Configured()}
+            />
+          </Suspense>
+        </div>
       </header>
 
       <main className="flex-1">{children}</main>
