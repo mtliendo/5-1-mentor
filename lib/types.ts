@@ -118,6 +118,16 @@ export interface ApiSharePreview {
   expiresAt?: string;
 }
 
+/** UI-normalized share preview. Names + libero only. */
+export interface SharedLineup {
+  roleNames: Record<string, string>;
+  liberoEnabled: boolean;
+  expiresAt?: string;
+  createdAt?: string;
+}
+
+export type ShareCreateResponse = ApiShareCreate;
+
 export interface QuizChoice {
   id: string;
   label: string;
