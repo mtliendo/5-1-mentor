@@ -23,6 +23,13 @@ export function chipLabel(name: string | null | undefined, role: Role): string {
   return `${name ?? role} · ${role}`;
 }
 
+export function displayRoleName(
+  player: RosterPlayer,
+  roleNames: Record<string, string>,
+): string {
+  return roleNames[player.id] ?? roleNames[player.defaultRole] ?? player.name;
+}
+
 export function applyRoleNames<T extends { id: PlayerId; name: string; role: Role }>(
   players: T[],
   roleNames: Record<string, string>,

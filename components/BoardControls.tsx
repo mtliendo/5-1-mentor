@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ShareLineup } from "./ShareLineup";
 import { passingLookHelp } from "@/lib/passing";
 import { ROSTER } from "@/lib/roster";
 import { ROTATION_IDS } from "@/lib/rotations";
@@ -177,6 +178,9 @@ export function BoardControls({
             </li>
           ))}
         </ul>
+        <div className="mt-3">
+          <ShareLineup roleNames={roleNames} liberoEnabled={liberoOn} />
+        </div>
       </div>
 
       <div>
