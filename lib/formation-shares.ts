@@ -52,11 +52,11 @@ export async function loadActiveShare(token: unknown): Promise<
 
 export function toPublicShareJson(
   payload: FormationSharePayload,
-  expiresAt: Date,
+  expiresAt?: Date,
 ) {
   return {
     roleNames: payload.roleNames,
     liberoEnabled: payload.liberoEnabled,
-    expiresAt: expiresAt.toISOString(),
+    ...(expiresAt ? { expiresAt: expiresAt.toISOString() } : {}),
   };
 }

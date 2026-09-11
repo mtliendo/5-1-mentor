@@ -103,10 +103,10 @@ Session routes are mounted by `proxy.ts` (Next.js 16 network boundary) using the
 
 - `GET` / `PUT` `/api/me/preferences` → `{ liberoEnabled, roleNames }`
 - `GET` / `PUT` `/api/me/progress` → `{ completed, lastRotation, lastMode, lastAlternate, lastStep }`
-- `POST` `/api/me/shares` (auth) → `{ url, token, expiresAt }` — `url` is `{APP_BASE_URL}/share/{token}` (prod example: `https://5-1-mentor.vercel.app/share/{token}`)
-- `GET` `/api/shares/{token}` (public preview) → `{ roleNames, liberoEnabled, expiresAt }` — 404 if missing, revoked, or expired; no owner PII
-- `POST` `/api/me/shares/{token}/import` (auth) → overwrites the importer’s `{ liberoEnabled, roleNames }`
-- `DELETE` `/api/me/shares/{token}` (auth, owner) → soft-revoke (`revoked_at`); 403 if not the owner
+- `POST` `/api/me/shares` (auth) → `{ token, url }` — `url` is `{APP_BASE_URL}/share/{token}` (FE page `app/share/[token]`; prod example: `https://5-1-mentor.vercel.app/share/{token}`). Optional extra: `expiresAt`
+- `GET` `/api/shares/{token}` (public preview) → `{ roleNames, liberoEnabled }` — 404 if missing, revoked, or expired; no owner PII. Optional extra: `expiresAt`
+- `POST` `/api/me/shares/{token}/import` (auth) → overwrites and returns `{ liberoEnabled, roleNames }`
+- `DELETE` `/api/me/shares/{token}` (auth, owner) → soft-revoke (`revoked_at`); `{ ok: true }`; 403 if not the owner
 
 Until Auth0 + Neon env vars exist, the homepage guest session is local and quiz/guided progress stays in the browser.
 

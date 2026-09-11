@@ -49,8 +49,8 @@ export async function POST(request: Request) {
   });
 
   return NextResponse.json({
-    url: buildShareUrl(token, request),
     token,
+    url: buildShareUrl(token, request),
     expiresAt: expiresAt.toISOString(),
   });
 }

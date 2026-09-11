@@ -104,18 +104,18 @@ export interface ApiPreferences {
   roleNames: Record<string, unknown>;
 }
 
-/** Wire shape for POST /api/me/shares. */
+/** Locked FE shape for POST /api/me/shares. `expiresAt` is an optional extra. */
 export interface ApiShareCreate {
-  url: string;
   token: string;
-  expiresAt: string;
+  url: string;
+  expiresAt?: string;
 }
 
-/** Wire shape for GET /api/shares/{token} — no owner PII. */
+/** Locked FE shape for GET /api/shares/{token} — no owner PII. */
 export interface ApiSharePreview {
   roleNames: Record<string, unknown>;
   liberoEnabled: boolean;
-  expiresAt: string;
+  expiresAt?: string;
 }
 
 export interface QuizChoice {
