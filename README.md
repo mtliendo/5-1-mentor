@@ -16,7 +16,7 @@ npm run build
 npm start
 ```
 
-The UI runs without API keys; guest progress falls back to `localStorage`. Signed-in preferences and progress need Neon + Auth0 (see below).
+The UI runs without API keys; guests keep preferences and progress in `localStorage`. Signed-in users sync through `GET`/`PUT` `/api/me/preferences` and `/api/me/progress` (Auth0 session + Neon).
 
 ## What ships in this MVP
 
@@ -28,7 +28,9 @@ The UI runs without API keys; guest progress falls back to `localStorage`. Signe
 - Guided lessons, free Explore, multiple-choice Quiz
 - `prefers-reduced-motion` (no chip easing; play-all still steps)
 - `content/rotations/r1.json`–`r6.json` stubs (see TODO below)
-- `/api/progress` local hook (client `localStorage`); signed-in data is `/api/me/*`
+- Auth0 v4 login (`/auth/login`, callback `/auth/callback`) — email + Google
+- Signed-in prefs/progress at `/api/me/*`; guests stay on `localStorage`
+- Legacy `/api/progress` is a thin compatibility stub only
 
 ## Content TODO
 
@@ -68,19 +70,21 @@ Public application settings:
 | Client ID | `ZNevIeCZyDRADUp1zQ3811oIJp14BcVS` |
 | SDK | `@auth0/nextjs-auth0` v4 |
 | Local callback | `http://localhost:3000/auth/callback` |
+| Production app | `https://5-1-mentor.vercel.app` (Vercel project `5-1-mentor`) |
+| Production callback | `https://5-1-mentor.vercel.app/auth/callback` |
 | Connections | Database (email) + Google |
 
 Dashboard URLs that must stay registered:
 
 1. Allowed Callback URLs:
    - `http://localhost:3000/auth/callback`
-   - `https://<your-vercel-domain>/auth/callback`
+   - `https://5-1-mentor.vercel.app/auth/callback`
 2. Allowed Logout URLs:
    - `http://localhost:3000`
-   - `https://<your-vercel-domain>`
+   - `https://5-1-mentor.vercel.app`
 3. Allowed Web Origins / Allowed Origins (CORS):
    - `http://localhost:3000`
-   - `https://<your-vercel-domain>`
+   - `https://5-1-mentor.vercel.app`
 
 Environment variables (see `.env.example`):
 
@@ -92,7 +96,7 @@ Environment variables (see `.env.example`):
 | `AUTH0_DOMAIN` | `focusotter-demos.us.auth0.com` |
 | `AUTH0_ISSUER_BASE_URL` | `https://focusotter-demos.us.auth0.com` (alias for domain) |
 | `AUTH0_CLIENT_ID` | `ZNevIeCZyDRADUp1zQ3811oIJp14BcVS` |
-| `APP_BASE_URL` | `http://localhost:3000` locally; omit on Vercel previews to infer the host |
+| `APP_BASE_URL` | `http://localhost:3000` locally; `https://5-1-mentor.vercel.app` in production (injected on Vercel) |
 | `AUTH0_BASE_URL` | Alias for `APP_BASE_URL` |
 
 Session routes are mounted by `proxy.ts` (Next.js 16 network boundary) using the v4 paths: `/auth/login`, `/auth/logout`, `/auth/callback`. API routes read the session via `@auth0/nextjs-auth0`. Unauthenticated calls return **401**. The first authenticated `/api/me/*` request upserts `app_users` and creates default preferences + progress rows.
@@ -101,3 +105,13 @@ Session routes are mounted by `proxy.ts` (Next.js 16 network boundary) using the
 - `GET` / `PUT` `/api/me/progress` → `{ completed, lastRotation, lastMode, lastAlternate, lastStep }`
 
 Until Auth0 + Neon env vars exist, the homepage guest session is local and quiz/guided progress stays in the browser.
+
+### Test signed-in prefs / progress
+
+1. Copy `.env.example` to `.env.local` and inject `AUTH0_SECRET`, `AUTH0_CLIENT_SECRET`, and `DATABASE_URL` (do not invent values). Side Quests injects these on Vercel for `https://5-1-mentor.vercel.app`.
+2. `npm run dev` or open production `https://5-1-mentor.vercel.app`. Header **Sign in** (home also has Email / Google) → Auth0 → callback `/auth/callback` (prod: `https://5-1-mentor.vercel.app/auth/callback`).
+3. Explore: toggle libero, edit a player name (always-visible **Name your lineup**), change rotation/mode/passing look. Reload — values should return.
+4. Guided: open a later lesson, reload `/guided` — same lesson.
+5. Quiz: finish a run, reload — best score persists.
+6. Sign out — guest mode uses `localStorage` only; `/api/me/*` returns 401.
+7. Desktop: Explore should show court and rotation/mode controls in one viewport (no scroll ping-pong). Passing looks show coach-language help.

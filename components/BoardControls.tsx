@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
+import { passingLookHelp } from "@/lib/passing";
+import { ROSTER } from "@/lib/roster";
 import { ROTATION_IDS } from "@/lib/rotations";
-import type { PassingAlternate, PlayMode, RotationId } from "@/lib/types";
+import type { PassingAlternate, PlayerId, PlayMode, RotationId } from "@/lib/types";
 
 function SegButton({
   active,
@@ -15,10 +17,10 @@ function SegButton({
     <button
       type="button"
       onClick={onClick}
-      className={`min-h-11 rounded-2xl px-3 text-sm font-semibold ${
+      className={`min-h-11 rounded-2xl px-3 text-sm font-extrabold ${
         active
-          ? "bg-ink text-paper"
-          : "bg-paper text-ink-soft hover:bg-paper-deep hover:text-ink"
+          ? "bg-accent text-white shadow-[0_6px_16px_rgba(255,59,0,0.35)]"
+          : "bg-on-panel/10 text-on-panel hover:bg-on-panel/15"
       }`}
     >
       {children}
@@ -46,6 +48,8 @@ export function BoardControls({
   onNext,
   onPlayAll,
   onReset,
+  roleNames,
+  onRoleName,
 }: {
   rotation: RotationId;
   mode: PlayMode;
@@ -66,11 +70,18 @@ export function BoardControls({
   onNext: () => void;
   onPlayAll: () => void;
   onReset: () => void;
+  roleNames: Record<string, string>;
+  onRoleName: (id: PlayerId, name: string) => void;
 }) {
+  const selectedLook =
+    passingAlternates.find((look) => look.id === passingId) ??
+    passingAlternates[0];
+
   return (
-    <div className="space-y-3 rounded-[28px] bg-white/70 p-3 shadow-[0_10px_30px_rgba(20,35,28,0.06)]">
+    <div className="space-y-3 rounded-[28px] bg-panel p-3 text-on-panel shadow-[0_16px_40px_rgba(0,0,0,0.25)]">
+      <div className="space-y-3 lg:sticky lg:top-0 lg:z-10 lg:bg-panel lg:pb-1">
       <div>
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+        <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-accent">
           Rotation
         </p>
         <div className="grid grid-cols-6 gap-1">
@@ -87,7 +98,7 @@ export function BoardControls({
       </div>
 
       <div>
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+        <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-accent">
           Mode
         </p>
         <div className="grid grid-cols-2 gap-1">
@@ -105,7 +116,7 @@ export function BoardControls({
 
       {mode === "serve-receive" ? (
         <div>
-          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+          <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-accent">
             Passing look
           </p>
           <div className="grid grid-cols-3 gap-1">
@@ -119,8 +130,17 @@ export function BoardControls({
               </SegButton>
             ))}
           </div>
+          {selectedLook ? (
+            <p className="mt-2 rounded-2xl border-2 border-accent/25 bg-white px-3 py-2 text-sm leading-relaxed text-on-panel">
+              <span className="font-extrabold text-accent">
+                Why {selectedLook.name}?
+              </span>{" "}
+              {passingLookHelp(selectedLook)}
+            </p>
+          ) : null}
         </div>
       ) : null}
+      </div>
 
       <div className="grid grid-cols-2 gap-1">
         <SegButton active={liberoOn} onClick={() => onLibero(!liberoOn)}>
@@ -132,7 +152,35 @@ export function BoardControls({
       </div>
 
       <div>
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+        <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-accent">
+          Name your lineup
+        </p>
+        <p className="mt-1 text-sm text-on-panel-soft">
+          Type your gym’s names. Chips always read Name · Role.
+        </p>
+        <ul className="mt-2 grid gap-2 sm:grid-cols-2">
+          {ROSTER.map((player) => (
+            <li key={player.id}>
+              <label
+                className="mb-1 block text-[11px] font-extrabold uppercase tracking-wide text-on-panel-soft"
+                htmlFor={`role-name-${player.id}`}
+              >
+                {player.defaultRole} · {player.id}
+              </label>
+              <input
+                id={`role-name-${player.id}`}
+                value={roleNames[player.id] ?? player.name}
+                placeholder={player.defaultRole}
+                onChange={(event) => onRoleName(player.id, event.target.value)}
+                className="min-h-11 w-full rounded-xl border-2 border-on-panel/15 bg-white px-3 text-sm font-semibold text-on-panel"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-accent">
           Step {stepIndex + 1}/{stepCount} · {stepLabel}
         </p>
         <div className="grid grid-cols-4 gap-1">

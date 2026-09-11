@@ -19,6 +19,19 @@ export function getRosterPlayer(id: PlayerId): RosterPlayer {
   return BY_ID[id];
 }
 
-export function chipLabel(name: string, role: Role): string {
-  return `${name} · ${role}`;
+export function chipLabel(name: string | null | undefined, role: Role): string {
+  return `${name ?? role} · ${role}`;
+}
+
+export function applyRoleNames<T extends { id: PlayerId; name: string; role: Role }>(
+  players: T[],
+  roleNames: Record<string, string>,
+): T[] {
+  return players.map((player) => {
+    const override = roleNames[player.id] ?? roleNames[player.role];
+    return {
+      ...player,
+      name: override || player.name,
+    };
+  });
 }

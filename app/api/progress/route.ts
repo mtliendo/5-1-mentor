@@ -8,11 +8,14 @@ const FALLBACK_PROGRESS: StudyProgress = {
   quizBest: 0,
   lastRotation: 1,
   lastMode: "serve-receive",
+  lastAlternate: null,
+  lastStep: 0,
 };
 
 /**
- * Legacy local-progress hook used by the MVP client.
- * Authenticated persistence is GET/PUT /api/me/progress.
+ * @deprecated Thin compatibility hook. The client now uses
+ * GET/PUT /api/me/preferences and /api/me/progress (Auth0 session)
+ * or localStorage for guests. Do not add new callers.
  */
 export async function GET() {
   return Response.json({
