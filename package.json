@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "node scripts/db-migrate.mjs"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.29.0",

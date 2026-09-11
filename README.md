@@ -44,14 +44,16 @@ Copy `.env.example` to `.env.local`. **Do not commit secrets.**
 
 ### Neon (`DATABASE_URL`)
 
-Use a pooled or direct Postgres URL from the Neon project (tables `app_users`, `user_preferences`, and `user_progress` already exist). Drizzle models live in `lib/db/schema.ts` and match those columns (JSON camelCase in APIs, snake_case in the database). Court formations are **not** stored in Neon.
+`DATABASE_URL` is injected via environment (local `.env.local` or host secrets). **Do not commit it.**
+
+The Neon database already has `app_users`, `user_preferences`, and `user_progress`. Drizzle models in `lib/db/schema.ts` match those columns (JSON camelCase in APIs, snake_case in the database). Court formations are **not** stored in Neon.
+
+`drizzle/0000_*.sql` is a baseline of that existing schema. It uses `CREATE TABLE IF NOT EXISTS` and only adds foreign keys when none are present, so `db:migrate` is safe on an already-provisioned database. Do not invent a conflicting schema.
 
 ```bash
 npm run db:generate   # drizzle-kit generate — writes SQL under drizzle/
-npm run db:migrate    # drizzle-kit migrate — apply only against your real DATABASE_URL
+npm run db:migrate    # applies baseline SQL; refused unless DATABASE_URL is a real Neon URL
 ```
-
-Do not run `db:migrate` with a placeholder URL. If the three tables are already on the target branch, treat `drizzle/` as the schema baseline rather than re-applying blindly.
 
 ### Auth0 (email + Google)
 
