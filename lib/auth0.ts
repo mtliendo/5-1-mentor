@@ -54,6 +54,11 @@ export function getAuth0Client(): Auth0Client | null {
       clientSecret: config.clientSecret,
       domain: config.domain,
       appBaseUrl: config.appBaseUrl,
+      routes: {
+        login: "/auth/login",
+        logout: "/auth/logout",
+        callback: "/auth/callback",
+      },
     });
   }
   return auth0Client;

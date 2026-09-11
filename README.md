@@ -57,17 +57,28 @@ npm run db:migrate    # applies baseline SQL; refused unless DATABASE_URL is a r
 
 ### Auth0 (email + Google)
 
-Create a **Regular Web Application** in the Auth0 dashboard.
+The app is already provisioned on tenant **`focusotter-demos.us.auth0.com`** (email + Google connections only). Copy `.env.example` and inject secrets from shared-box / Vercel — do not invent or commit `AUTH0_SECRET` or `AUTH0_CLIENT_SECRET`.
 
-1. Enable the **Username-Password-Authentication** (email) and **Google** social connections.
-2. Allowed Callback URLs:
+Public application settings:
+
+| Setting | Value |
+| --- | --- |
+| Domain / issuer host | `focusotter-demos.us.auth0.com` |
+| Issuer | `https://focusotter-demos.us.auth0.com` |
+| Client ID | `ZNevIeCZyDRADUp1zQ3811oIJp14BcVS` |
+| SDK | `@auth0/nextjs-auth0` v4 |
+| Local callback | `http://localhost:3000/auth/callback` |
+| Connections | Database (email) + Google |
+
+Dashboard URLs that must stay registered:
+
+1. Allowed Callback URLs:
    - `http://localhost:3000/auth/callback`
    - `https://<your-vercel-domain>/auth/callback`
-   - Optional preview wildcard if your tenant allows it: `https://*.vercel.app/auth/callback`
-3. Allowed Logout URLs:
+2. Allowed Logout URLs:
    - `http://localhost:3000`
    - `https://<your-vercel-domain>`
-4. Allowed Web Origins / Allowed Origins (CORS):
+3. Allowed Web Origins / Allowed Origins (CORS):
    - `http://localhost:3000`
    - `https://<your-vercel-domain>`
 
@@ -75,16 +86,16 @@ Environment variables (see `.env.example`):
 
 | Variable | Notes |
 | --- | --- |
-| `DATABASE_URL` | Neon connection string |
-| `AUTH0_SECRET` | `openssl rand -hex 32` |
-| `AUTH0_DOMAIN` | Tenant host, e.g. `your-tenant.us.auth0.com` |
-| `AUTH0_CLIENT_ID` | Application client ID |
-| `AUTH0_CLIENT_SECRET` | Application client secret |
+| `DATABASE_URL` | Neon connection string (injected; not committed) |
+| `AUTH0_SECRET` | Session cookie secret from shared-box (not committed) |
+| `AUTH0_CLIENT_SECRET` | Application secret from shared-box (not committed) |
+| `AUTH0_DOMAIN` | `focusotter-demos.us.auth0.com` |
+| `AUTH0_ISSUER_BASE_URL` | `https://focusotter-demos.us.auth0.com` (alias for domain) |
+| `AUTH0_CLIENT_ID` | `ZNevIeCZyDRADUp1zQ3811oIJp14BcVS` |
 | `APP_BASE_URL` | `http://localhost:3000` locally; omit on Vercel previews to infer the host |
 | `AUTH0_BASE_URL` | Alias for `APP_BASE_URL` |
-| `AUTH0_ISSUER_BASE_URL` | Alias for `AUTH0_DOMAIN` (with or without `https://`) |
 
-Session routes are mounted by `proxy.ts` (Next.js 16 network boundary): `/auth/login`, `/auth/logout`, `/auth/callback`. API routes read the session via `@auth0/nextjs-auth0`. Unauthenticated calls return **401**. The first authenticated `/api/me/*` request upserts `app_users` and creates default preferences + progress rows.
+Session routes are mounted by `proxy.ts` (Next.js 16 network boundary) using the v4 paths: `/auth/login`, `/auth/logout`, `/auth/callback`. API routes read the session via `@auth0/nextjs-auth0`. Unauthenticated calls return **401**. The first authenticated `/api/me/*` request upserts `app_users` and creates default preferences + progress rows.
 
 - `GET` / `PUT` `/api/me/preferences` → `{ liberoEnabled, roleNames }`
 - `GET` / `PUT` `/api/me/progress` → `{ completed, lastRotation, lastMode, lastAlternate, lastStep }`
