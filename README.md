@@ -70,19 +70,21 @@ Public application settings:
 | Client ID | `ZNevIeCZyDRADUp1zQ3811oIJp14BcVS` |
 | SDK | `@auth0/nextjs-auth0` v4 |
 | Local callback | `http://localhost:3000/auth/callback` |
+| Production app | `https://5-1-mentor.vercel.app` (Vercel project `5-1-mentor`) |
+| Production callback | `https://5-1-mentor.vercel.app/auth/callback` |
 | Connections | Database (email) + Google |
 
 Dashboard URLs that must stay registered:
 
 1. Allowed Callback URLs:
    - `http://localhost:3000/auth/callback`
-   - `https://<your-vercel-domain>/auth/callback`
+   - `https://5-1-mentor.vercel.app/auth/callback`
 2. Allowed Logout URLs:
    - `http://localhost:3000`
-   - `https://<your-vercel-domain>`
+   - `https://5-1-mentor.vercel.app`
 3. Allowed Web Origins / Allowed Origins (CORS):
    - `http://localhost:3000`
-   - `https://<your-vercel-domain>`
+   - `https://5-1-mentor.vercel.app`
 
 Environment variables (see `.env.example`):
 
@@ -94,7 +96,7 @@ Environment variables (see `.env.example`):
 | `AUTH0_DOMAIN` | `focusotter-demos.us.auth0.com` |
 | `AUTH0_ISSUER_BASE_URL` | `https://focusotter-demos.us.auth0.com` (alias for domain) |
 | `AUTH0_CLIENT_ID` | `ZNevIeCZyDRADUp1zQ3811oIJp14BcVS` |
-| `APP_BASE_URL` | `http://localhost:3000` locally; omit on Vercel previews to infer the host |
+| `APP_BASE_URL` | `http://localhost:3000` locally; `https://5-1-mentor.vercel.app` in production (injected on Vercel) |
 | `AUTH0_BASE_URL` | Alias for `APP_BASE_URL` |
 
 Session routes are mounted by `proxy.ts` (Next.js 16 network boundary) using the v4 paths: `/auth/login`, `/auth/logout`, `/auth/callback`. API routes read the session via `@auth0/nextjs-auth0`. Unauthenticated calls return **401**. The first authenticated `/api/me/*` request upserts `app_users` and creates default preferences + progress rows.
