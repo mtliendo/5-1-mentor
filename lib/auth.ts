@@ -1,18 +1,28 @@
+import { getAuth0Client, isAuth0Configured } from "./auth0";
 import type { SessionUser } from "./types";
 
+export { isAuth0Configured };
+
 /**
- * Auth0 hook — wire `getSession()` here when AUTH0_* env vars exist.
- * The MVP never reads secrets; it falls back to a local guest.
+ * UI helper: Auth0 session when configured and signed in, otherwise a local guest.
+ * Session-protected APIs use `requireApiUser()` and return 401 instead of this guest.
  */
 export async function getCurrentUser(): Promise<SessionUser> {
-  const configured = Boolean(
-    process.env.AUTH0_SECRET &&
-      process.env.AUTH0_CLIENT_ID &&
-      process.env.AUTH0_ISSUER_BASE_URL,
-  );
-
-  if (configured) {
-    // TODO: return (await auth0.getSession())?.user mapped to SessionUser
+  const auth0 = getAuth0Client();
+  if (auth0) {
+    try {
+      const session = await auth0.getSession();
+      if (session?.user?.sub) {
+        return {
+          id: session.user.sub,
+          name: session.user.name ?? session.user.email ?? "Player",
+          email: session.user.email,
+          source: "auth0",
+        };
+      }
+    } catch {
+      // Fall through to the local guest used by the MVP UI.
+    }
   }
 
   return {
@@ -20,8 +30,4 @@ export async function getCurrentUser(): Promise<SessionUser> {
     name: "Guest player",
     source: "local",
   };
-}
-
-export function isAuth0Configured(): boolean {
-  return Boolean(process.env.AUTH0_SECRET);
 }

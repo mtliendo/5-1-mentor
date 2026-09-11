@@ -16,7 +16,7 @@ npm run build
 npm start
 ```
 
-No API keys are required. Auth0 and Neon are stubbed; progress falls back to `localStorage`.
+The UI runs without API keys; guest progress falls back to `localStorage`. Signed-in preferences and progress need Neon + Auth0 (see below).
 
 ## What ships in this MVP
 
@@ -28,7 +28,7 @@ No API keys are required. Auth0 and Neon are stubbed; progress falls back to `lo
 - Guided lessons, free Explore, multiple-choice Quiz
 - `prefers-reduced-motion` (no chip easing; play-all still steps)
 - `content/rotations/r1.json`–`r6.json` stubs (see TODO below)
-- `/api/progress` hook for a future Neon table; client writes localStorage today
+- `/api/progress` local hook (client `localStorage`); signed-in data is `/api/me/*`
 
 ## Content TODO
 
@@ -38,11 +38,66 @@ Coordinates in `content/rotations/` are normalized stubs (`x` left→right, `y` 
 node scripts/generate-rotations.mjs
 ```
 
-## Auth0 / Neon (later)
+## Auth0 + Neon backend
 
-Copy `.env.example` to `.env.local` when you are ready. Do not commit secrets.
+Copy `.env.example` to `.env.local`. **Do not commit secrets.**
 
-- Auth0: implement `getSession()` inside `lib/auth.ts`
-- Neon: run SQL through `lib/neon.ts` and persist `/api/progress`
+### Neon (`DATABASE_URL`)
 
-Until those env vars exist, the guest session is local and quiz/guided progress stays in the browser.
+`DATABASE_URL` is injected via environment (local `.env.local` or host secrets). **Do not commit it.**
+
+The Neon database already has `app_users`, `user_preferences`, and `user_progress`. Drizzle models in `lib/db/schema.ts` match those columns (JSON camelCase in APIs, snake_case in the database). Court formations are **not** stored in Neon.
+
+`drizzle/0000_*.sql` is a baseline of that existing schema. It uses `CREATE TABLE IF NOT EXISTS` and only adds foreign keys when none are present, so `db:migrate` is safe on an already-provisioned database. Do not invent a conflicting schema.
+
+```bash
+npm run db:generate   # drizzle-kit generate — writes SQL under drizzle/
+npm run db:migrate    # applies baseline SQL; refused unless DATABASE_URL is a real Neon URL
+```
+
+### Auth0 (email + Google)
+
+The app is already provisioned on tenant **`focusotter-demos.us.auth0.com`** (email + Google connections only). Copy `.env.example` and inject secrets from shared-box / Vercel — do not invent or commit `AUTH0_SECRET` or `AUTH0_CLIENT_SECRET`.
+
+Public application settings:
+
+| Setting | Value |
+| --- | --- |
+| Domain / issuer host | `focusotter-demos.us.auth0.com` |
+| Issuer | `https://focusotter-demos.us.auth0.com` |
+| Client ID | `ZNevIeCZyDRADUp1zQ3811oIJp14BcVS` |
+| SDK | `@auth0/nextjs-auth0` v4 |
+| Local callback | `http://localhost:3000/auth/callback` |
+| Connections | Database (email) + Google |
+
+Dashboard URLs that must stay registered:
+
+1. Allowed Callback URLs:
+   - `http://localhost:3000/auth/callback`
+   - `https://<your-vercel-domain>/auth/callback`
+2. Allowed Logout URLs:
+   - `http://localhost:3000`
+   - `https://<your-vercel-domain>`
+3. Allowed Web Origins / Allowed Origins (CORS):
+   - `http://localhost:3000`
+   - `https://<your-vercel-domain>`
+
+Environment variables (see `.env.example`):
+
+| Variable | Notes |
+| --- | --- |
+| `DATABASE_URL` | Neon connection string (injected; not committed) |
+| `AUTH0_SECRET` | Session cookie secret from shared-box (not committed) |
+| `AUTH0_CLIENT_SECRET` | Application secret from shared-box (not committed) |
+| `AUTH0_DOMAIN` | `focusotter-demos.us.auth0.com` |
+| `AUTH0_ISSUER_BASE_URL` | `https://focusotter-demos.us.auth0.com` (alias for domain) |
+| `AUTH0_CLIENT_ID` | `ZNevIeCZyDRADUp1zQ3811oIJp14BcVS` |
+| `APP_BASE_URL` | `http://localhost:3000` locally; omit on Vercel previews to infer the host |
+| `AUTH0_BASE_URL` | Alias for `APP_BASE_URL` |
+
+Session routes are mounted by `proxy.ts` (Next.js 16 network boundary) using the v4 paths: `/auth/login`, `/auth/logout`, `/auth/callback`. API routes read the session via `@auth0/nextjs-auth0`. Unauthenticated calls return **401**. The first authenticated `/api/me/*` request upserts `app_users` and creates default preferences + progress rows.
+
+- `GET` / `PUT` `/api/me/preferences` → `{ liberoEnabled, roleNames }`
+- `GET` / `PUT` `/api/me/progress` → `{ completed, lastRotation, lastMode, lastAlternate, lastStep }`
+
+Until Auth0 + Neon env vars exist, the homepage guest session is local and quiz/guided progress stays in the browser.
