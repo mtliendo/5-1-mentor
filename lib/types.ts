@@ -123,7 +123,6 @@ export interface SharedLineup {
   roleNames: Record<string, string>;
   liberoEnabled: boolean;
   expiresAt?: string;
-  createdAt?: string;
 }
 
 export type ShareCreateResponse = ApiShareCreate;

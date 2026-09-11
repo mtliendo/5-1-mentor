@@ -1,5 +1,5 @@
 import { fromApiPreferences, normalizeRoleNames } from "./progress-adapter";
-import { persistPreferences, savePreferences, syncPreferencesFromApi } from "./storage";
+import { persistPreferences, savePreferences } from "./storage";
 import type {
   ShareCreateResponse,
   SharedLineup,
@@ -34,17 +34,6 @@ function pickString(
   for (const key of keys) {
     const value = raw[key];
     if (typeof value === "string" && value.trim()) return value.trim();
-  }
-  return undefined;
-}
-
-function pickBoolean(
-  raw: Record<string, unknown>,
-  keys: string[],
-): boolean | undefined {
-  for (const key of keys) {
-    const value = raw[key];
-    if (typeof value === "boolean") return value;
   }
   return undefined;
 }
@@ -96,50 +85,28 @@ function errorFromResponse(
   return { kind: "failed", message, status };
 }
 
-function unwrapSharePayload(raw: unknown): Record<string, unknown> | null {
-  if (!isPlainObject(raw)) return null;
-  const nested = raw.share ?? raw.data ?? raw.payload ?? raw.lineup;
-  if (isPlainObject(nested)) return { ...raw, ...nested };
-  return raw;
-}
-
 export function parseSharedLineup(raw: unknown): SharedLineup | null {
-  const payload = unwrapSharePayload(raw);
-  if (!payload) return null;
-
-  const roleNamesRaw =
-    payload.roleNames ?? payload.roles ?? payload.names ?? payload.role_names;
-  const liberoEnabled = pickBoolean(payload, [
-    "liberoEnabled",
-    "liberoOn",
-    "libero",
-    "libero_enabled",
-  ]);
-
-  if (roleNamesRaw === undefined && liberoEnabled === undefined) {
+  if (!isPlainObject(raw)) return null;
+  if (!isPlainObject(raw.roleNames) || typeof raw.liberoEnabled !== "boolean") {
     return null;
   }
 
   return {
-    roleNames: normalizeRoleNames(roleNamesRaw),
-    liberoEnabled: liberoEnabled ?? true,
-    expiresAt: pickString(payload, ["expiresAt", "expires_at"]),
-    createdAt: pickString(payload, ["createdAt", "created_at"]),
+    roleNames: normalizeRoleNames(raw.roleNames),
+    liberoEnabled: raw.liberoEnabled,
+    expiresAt: pickString(raw, ["expiresAt"]),
   };
 }
 
 export function parseCreateShare(raw: unknown): ShareCreateResponse | null {
-  const payload = unwrapSharePayload(raw);
-  if (!payload) return null;
-
-  const token = pickString(payload, ["token", "shareToken", "id"]);
-  if (!token) return null;
-
-  const url = pickString(payload, ["url", "shareUrl", "href", "path"]);
+  if (!isPlainObject(raw)) return null;
+  const token = pickString(raw, ["token"]);
+  const url = pickString(raw, ["url"]);
+  if (!token || !url) return null;
   return {
     token,
-    url: url ?? `/share/${token}`,
-    expiresAt: pickString(payload, ["expiresAt", "expires_at"]),
+    url,
+    expiresAt: pickString(raw, ["expiresAt"]),
   };
 }
 
@@ -283,14 +250,20 @@ export async function importShare(
   }
 
   const parsed = parseSharedLineup(result.body);
-  if (parsed) {
-    const prefs = fromApiPreferences(parsed);
-    savePreferences(prefs);
-    return { ok: true, value: prefs };
+  if (!parsed) {
+    return {
+      ok: false,
+      error: {
+        kind: "failed",
+        message: "Share API returned an unexpected lineup.",
+        status: result.status,
+      },
+    };
   }
 
-  const synced = await syncPreferencesFromApi();
-  return { ok: true, value: synced };
+  const prefs = fromApiPreferences(parsed);
+  savePreferences(prefs);
+  return { ok: true, value: prefs };
 }
 
 export async function revokeShare(token: string): Promise<ShareResult<true>> {
@@ -299,6 +272,10 @@ export async function revokeShare(token: string): Promise<ShareResult<true>> {
     { method: "DELETE" },
   );
   if ("error" in result) return { ok: false, error: result.error };
+
+  if (result.status === 204) {
+    return { ok: true, value: true };
+  }
 
   if (result.status === 404 || result.status === 405 || result.status === 501) {
     return {

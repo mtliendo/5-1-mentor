@@ -133,9 +133,7 @@ export function ShareImport({
             <p className="text-sm leading-relaxed text-on-panel-soft">
               {share.expiresAt
                 ? `Link expires ${new Date(share.expiresAt).toLocaleDateString()}. `
-                : share.createdAt
-                  ? `Shared ${new Date(share.createdAt).toLocaleDateString()}. `
-                  : null}
+                : null}
               Import writes names + libero onto your signed-in account.
             </p>
             <LineupPreview
