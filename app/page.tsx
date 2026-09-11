@@ -43,8 +43,11 @@ export default async function HomePage() {
           quiz yourself.
         </p>
         <p className="mt-4 text-xs text-line/55">
-          Signed in as {user.name} ({user.source}
-          {neon ? ", Neon ready" : ", local progress"}).
+          {user.name}
+          {user.source === "local"
+            ? " · progress stays on this device"
+            : " · signed in"}
+          {neon ? " · Neon connected" : ""}
         </p>
       </section>
 
