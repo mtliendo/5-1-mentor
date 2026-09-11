@@ -2,7 +2,8 @@
 /**
  * Runs drizzle-kit migrate only against a real DATABASE_URL.
  * Neon already has app_users / user_preferences / user_progress;
- * the baseline SQL is IF NOT EXISTS so a re-run is a no-op on those tables.
+ * later migrations add formation_shares. SQL is IF NOT EXISTS so a re-run
+ * is a no-op on tables/constraints that already exist.
  */
 import { spawnSync } from "node:child_process";
 

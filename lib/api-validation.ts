@@ -98,6 +98,42 @@ export function parseProgressPatch(
   return { patch };
 }
 
+/** Url-safe share tokens are 32+ bytes of entropy (base64url ≈ 43 chars). */
+const SHARE_TOKEN_PATTERN = /^[A-Za-z0-9_-]{32,128}$/;
+
+export function parseShareToken(
+  value: unknown,
+): { token: string } | { error: string } {
+  if (typeof value !== "string") {
+    return { error: "token must be a string" };
+  }
+  const token = value.trim();
+  if (!SHARE_TOKEN_PATTERN.test(token)) {
+    return { error: "Invalid share token" };
+  }
+  return { token };
+}
+
+export function parseFormationSharePayload(
+  raw: unknown,
+): { payload: { roleNames: Record<string, unknown>; liberoEnabled: boolean } } | { error: string } {
+  if (!isPlainObject(raw)) {
+    return { error: "payload must be an object" };
+  }
+  if (typeof raw.liberoEnabled !== "boolean") {
+    return { error: "liberoEnabled must be a boolean" };
+  }
+  if (!isPlainObject(raw.roleNames)) {
+    return { error: "roleNames must be an object" };
+  }
+  return {
+    payload: {
+      roleNames: raw.roleNames,
+      liberoEnabled: raw.liberoEnabled,
+    },
+  };
+}
+
 export async function readJsonBody(
   request: Request,
 ): Promise<{ value: unknown } | { error: string }> {

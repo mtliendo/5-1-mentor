@@ -16,7 +16,7 @@ npm run build
 npm start
 ```
 
-The UI runs without API keys; guests keep preferences and progress in `localStorage`. Signed-in users sync through `GET`/`PUT` `/api/me/preferences` and `/api/me/progress` (Auth0 session + Neon).
+The UI runs without API keys; guests keep preferences and progress in `localStorage`. Signed-in users sync through `GET`/`PUT` `/api/me/preferences` and `/api/me/progress` (Auth0 session + Neon). Authenticated users can snapshot custom role names + libero preference to a share link (`POST /api/me/shares`); another signed-in user imports that snapshot. Court layouts are not stored.
 
 ## What ships in this MVP
 
@@ -48,9 +48,9 @@ Copy `.env.example` to `.env.local`. **Do not commit secrets.**
 
 `DATABASE_URL` is injected via environment (local `.env.local` or host secrets). **Do not commit it.**
 
-The Neon database already has `app_users`, `user_preferences`, and `user_progress`. Drizzle models in `lib/db/schema.ts` match those columns (JSON camelCase in APIs, snake_case in the database). Court formations are **not** stored in Neon.
+The Neon database already has `app_users`, `user_preferences`, and `user_progress`. `formation_shares` is added by `drizzle/0001_formation_shares.sql`. Drizzle models in `lib/db/schema.ts` match those columns (JSON camelCase in APIs, snake_case in the database). Court formations are **not** stored in Neon — shares snapshot only `{ roleNames, liberoEnabled }`.
 
-`drizzle/0000_*.sql` is a baseline of that existing schema. It uses `CREATE TABLE IF NOT EXISTS` and only adds foreign keys when none are present, so `db:migrate` is safe on an already-provisioned database. Do not invent a conflicting schema.
+`drizzle/0000_*.sql` is a baseline of the original schema. Later migrations (including `0001_formation_shares.sql`) use `CREATE TABLE IF NOT EXISTS` and only add constraints when missing, so `db:migrate` is safe on an already-provisioned database. Do not invent a conflicting schema.
 
 ```bash
 npm run db:generate   # drizzle-kit generate — writes SQL under drizzle/
@@ -103,6 +103,10 @@ Session routes are mounted by `proxy.ts` (Next.js 16 network boundary) using the
 
 - `GET` / `PUT` `/api/me/preferences` → `{ liberoEnabled, roleNames }`
 - `GET` / `PUT` `/api/me/progress` → `{ completed, lastRotation, lastMode, lastAlternate, lastStep }`
+- `POST` `/api/me/shares` (auth) → `{ url, token, expiresAt }` — `url` is `{APP_BASE_URL}/share/{token}` (prod example: `https://5-1-mentor.vercel.app/share/{token}`)
+- `GET` `/api/shares/{token}` (public preview) → `{ roleNames, liberoEnabled, expiresAt }` — 404 if missing, revoked, or expired; no owner PII
+- `POST` `/api/me/shares/{token}/import` (auth) → overwrites the importer’s `{ liberoEnabled, roleNames }`
+- `DELETE` `/api/me/shares/{token}` (auth, owner) → soft-revoke (`revoked_at`); 403 if not the owner
 
 Until Auth0 + Neon env vars exist, the homepage guest session is local and quiz/guided progress stays in the browser.
 

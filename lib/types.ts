@@ -104,6 +104,20 @@ export interface ApiPreferences {
   roleNames: Record<string, unknown>;
 }
 
+/** Wire shape for POST /api/me/shares. */
+export interface ApiShareCreate {
+  url: string;
+  token: string;
+  expiresAt: string;
+}
+
+/** Wire shape for GET /api/shares/{token} — no owner PII. */
+export interface ApiSharePreview {
+  roleNames: Record<string, unknown>;
+  liberoEnabled: boolean;
+  expiresAt: string;
+}
+
 export interface QuizChoice {
   id: string;
   label: string;

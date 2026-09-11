@@ -8,6 +8,20 @@ export type AuthedUser = {
   email: string | null;
 };
 
+export function requireDatabase():
+  | { ok: true }
+  | { response: NextResponse } {
+  if (!isDatabaseConfigured()) {
+    return {
+      response: NextResponse.json(
+        { error: "Database is not configured" },
+        { status: 500 },
+      ),
+    };
+  }
+  return { ok: true };
+}
+
 export async function requireApiUser(): Promise<
   { user: AuthedUser } | { response: NextResponse }
 > {
@@ -23,14 +37,8 @@ export async function requireApiUser(): Promise<
       return unauthorized();
     }
 
-    if (!isDatabaseConfigured()) {
-      return {
-        response: NextResponse.json(
-          { error: "Database is not configured" },
-          { status: 500 },
-        ),
-      };
-    }
+    const dbReady = requireDatabase();
+    if ("response" in dbReady) return dbReady;
 
     const email =
       typeof session.user.email === "string" ? session.user.email : null;
