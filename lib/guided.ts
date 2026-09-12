@@ -26,7 +26,7 @@ export const GUIDED_LESSONS: GuidedLesson[] = [
   {
     id: "r1-serve",
     title: "Rotation 1 — serve",
-    body: "Setter starts in P1 (right back) and serves. Front stacks near mid-net (MB2 closest to the tape; RS and OH1 tucked), then releases to base after the toss.",
+    body: "Setter starts in P1 (right back) and serves. Front stacks Opposite (RS) left, MB2 middle, OH1 right. After contact they switch to base: OH1 left @4, Opposite right @2.",
     rotation: 1,
     mode: "serve",
     liberoOn: true,
@@ -35,7 +35,7 @@ export const GUIDED_LESSONS: GuidedLesson[] = [
   {
     id: "r1-receive",
     title: "Rotation 1 — serve-receive",
-    body: "OH cover setter is the everyday look. OH1 drops back to hide S; passers include OH1. RS swings left on first ball.",
+    body: "OH cover setter is the everyday look. OH1 drops deep to pass with OH2 and L; S hides right. After the ball is over, OH1 goes left and Opposite goes right.",
     rotation: 1,
     mode: "serve-receive",
     passingId: "oh-cover-setter",
@@ -74,7 +74,7 @@ export const GUIDED_LESSONS: GuidedLesson[] = [
   {
     id: "setter-front",
     title: "Setter in front (R4)",
-    body: "When the setter is in the front row you only have two front-row attackers. Watch OH2 and MB1 after the stack; primary receive is OH2 drop.",
+    body: "When the setter is in the front row you only have two front-row attackers. Stack S / MB1 / OH2, then release to OH2 left, MB1 middle, S right. Primary receive is OH2 drop.",
     rotation: 4,
     mode: "serve-receive",
     passingId: "oh2-drop",

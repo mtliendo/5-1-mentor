@@ -2,12 +2,12 @@
   "id": "r4",
   "rotation": 4,
   "title": "Rotation 4 — Setter left front",
-  "summary": "S at P4 (left front). RS/opposite serves. Two front-row attackers after the stack: OH2 and MB1.",
-  "notes": "Serve stack is S / MB1 / OH2, then release to OH2@4, MB1@3, S@2. Primary receive: S+MB1 shade left, RS stays back-right, OH2 drops to pass.",
+  "summary": "RS/OPP serves. Rotational: 1OPP 2MB1 3OH2 4S 5OH1 6MB2. Stack S / MB1 / OH2 (legal S–OH2–MB1); base front OH2–MB1–S, back OH1–L–OPP.",
+  "notes": "ConanLiuMD R4: stack the front three, then release to OH2@4 / MB1@3 / S@2. Receive: S+MB1 upper-left; OH2+OH1+L pass. Alternate: RS passes.",
   "lineup": {
     "1": "OPP",
-    "2": "OH2",
-    "3": "MB1",
+    "2": "MB1",
+    "3": "OH2",
     "4": "S",
     "5": "OH1",
     "6": "MB2"
@@ -19,7 +19,7 @@
         {
           "id": "stack",
           "label": "Stack",
-          "cue": "Front S, MB1, and OH2 stack near mid-net so they can release to OH2@4, MB1@3, S@2.",
+          "cue": "Front stacks S, MB1, and OH2 near mid-net (legal: S left of OH2 left of MB1). RS/Opposite serving P1.",
           "positions": {
             "S": {
               "x": 0.36,
@@ -40,16 +40,16 @@
               "courtPos": 5
             },
             "OH2": {
-              "x": 0.64,
-              "y": 0.22,
-              "role": "Outside",
-              "courtPos": 2
-            },
-            "MB1": {
               "x": 0.5,
               "y": 0.14,
-              "role": "Middle",
+              "role": "Outside",
               "courtPos": 3
+            },
+            "MB1": {
+              "x": 0.66,
+              "y": 0.22,
+              "role": "Middle",
+              "courtPos": 2
             },
             "MB2": {
               "x": 0.5,
@@ -68,7 +68,7 @@
         {
           "id": "toss",
           "label": "Toss",
-          "cue": "RS/opposite tosses from the P1 endline. Front holds the stack.",
+          "cue": "RS/Opposite tosses from the P1 endline. Front holds the stack.",
           "positions": {
             "S": {
               "x": 0.36,
@@ -89,16 +89,16 @@
               "courtPos": 5
             },
             "OH2": {
-              "x": 0.64,
-              "y": 0.22,
-              "role": "Outside",
-              "courtPos": 2
-            },
-            "MB1": {
               "x": 0.5,
               "y": 0.14,
-              "role": "Middle",
+              "role": "Outside",
               "courtPos": 3
+            },
+            "MB1": {
+              "x": 0.66,
+              "y": 0.22,
+              "role": "Middle",
+              "courtPos": 2
             },
             "MB2": {
               "x": 0.5,
@@ -117,7 +117,7 @@
         {
           "id": "release",
           "label": "Release",
-          "cue": "Release: OH2 to left front, MB1 stays middle, S to right front.",
+          "cue": "After contact: OH2 to left front, MB1 to middle, S to right front — stack spots are not base spots.",
           "positions": {
             "S": {
               "x": 0.72,
@@ -141,13 +141,13 @@
               "x": 0.26,
               "y": 0.2,
               "role": "Outside",
-              "courtPos": 2
+              "courtPos": 3
             },
             "MB1": {
               "x": 0.5,
               "y": 0.18,
               "role": "Middle",
-              "courtPos": 3
+              "courtPos": 2
             },
             "MB2": {
               "x": 0.5,
@@ -166,13 +166,13 @@
         {
           "id": "base",
           "label": "Base",
-          "cue": "Base: OH2@4, MB1@3, S@2. Back RS@1, OH1@5, L@6.",
+          "cue": "Base front L→R: OH2 – MB1 – S. Back OH1–L–Opposite.",
           "positions": {
             "S": {
               "x": 0.82,
               "y": 0.2,
               "role": "Setter",
-              "courtPos": 4
+              "courtPos": 2
             },
             "OPP": {
               "x": 0.82,
@@ -190,7 +190,7 @@
               "x": 0.18,
               "y": 0.2,
               "role": "Outside",
-              "courtPos": 2
+              "courtPos": 4
             },
             "MB1": {
               "x": 0.5,
@@ -219,12 +219,12 @@
         {
           "id": "oh2-drop",
           "name": "OH2 drop",
-          "description": "S and MB1 shift left. RS stays back-right so OH2 can drop back to pass — keeps the opposite off the platform.",
+          "description": "S and MB1 shade upper-left. OH2 drops to pass with OH1 and L.",
           "steps": [
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "S + MB1 shift left. RS goes back-right. OH2 drops back to pass. Passers: OH2, OH1, L.",
+              "cue": "S + MB1 upper-left. OH2 drops to pass with OH1 and L. RS stays back-right.",
               "positions": {
                 "S": {
                   "x": 0.1,
@@ -245,16 +245,16 @@
                   "courtPos": 5
                 },
                 "OH2": {
-                  "x": 0.62,
-                  "y": 0.46,
+                  "x": 0.36,
+                  "y": 0.48,
                   "role": "Outside",
-                  "courtPos": 2
+                  "courtPos": 3
                 },
                 "MB1": {
-                  "x": 0.28,
+                  "x": 0.58,
                   "y": 0.16,
                   "role": "Middle",
-                  "courtPos": 3
+                  "courtPos": 2
                 },
                 "MB2": {
                   "x": 0.5,
@@ -273,13 +273,13 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "Ball is over — OH2 back to 4, MB1 to 3, S to the setting target.",
+              "cue": "Ball is over — OH2 to 4, MB1 to 3, S to the setting target.",
               "positions": {
                 "S": {
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 4
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
@@ -297,7 +297,7 @@
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 2
+                  "courtPos": 4
                 },
                 "MB1": {
                   "x": 0.5,
@@ -324,12 +324,12 @@
         {
           "id": "rs-pass",
           "name": "RS pass",
-          "description": "Front stacks left and RS/opposite passes, so OH2 can stay on the left pin.",
+          "description": "Front stays stacked left and RS/Opposite passes so OH2 can stay on the left pin.",
           "steps": [
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "Front stacks left. RS passes with OH1 and L. OH2 stays left front.",
+              "cue": "Front stacked left. RS/Opposite passes with OH1 and L. OH2 stays left front.",
               "positions": {
                 "S": {
                   "x": 0.1,
@@ -350,16 +350,16 @@
                   "courtPos": 5
                 },
                 "OH2": {
-                  "x": 0.42,
+                  "x": 0.28,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 2
+                  "courtPos": 3
                 },
                 "MB1": {
-                  "x": 0.26,
+                  "x": 0.46,
                   "y": 0.16,
                   "role": "Middle",
-                  "courtPos": 3
+                  "courtPos": 2
                 },
                 "MB2": {
                   "x": 0.5,
@@ -378,13 +378,13 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "After contact, same front base — S hunts the second ball from P2.",
+              "cue": "Same front base — S hunts the second ball from the right front.",
               "positions": {
                 "S": {
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 4
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
@@ -402,7 +402,7 @@
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 2
+                  "courtPos": 4
                 },
                 "MB1": {
                   "x": 0.5,
@@ -455,16 +455,16 @@
                   "courtPos": 5
                 },
                 "OH2": {
-                  "x": 0.42,
+                  "x": 0.28,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 2
+                  "courtPos": 3
                 },
                 "MB1": {
-                  "x": 0.26,
+                  "x": 0.46,
                   "y": 0.16,
                   "role": "Middle",
-                  "courtPos": 3
+                  "courtPos": 2
                 },
                 "MB2": {
                   "x": 0.52,
@@ -489,7 +489,7 @@
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 4
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
@@ -507,7 +507,7 @@
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 2
+                  "courtPos": 4
                 },
                 "MB1": {
                   "x": 0.5,

@@ -2,8 +2,8 @@
   "id": "r2",
   "rotation": 2,
   "title": "Rotation 2 — Setter middle back",
-  "summary": "S at P6. OH1 serves from P1, then enters left-back. Front base is OH2–MB2–RS.",
-  "notes": "Front MB2 + RS stack so they can step to 3 and 2 after contact. Receive: shift MB2, S, and RS right; L and both outsides pass.",
+  "summary": "OH1 serves. Rotational: 1OH1 2MB2 3OPP 4OH2 5MB1 6S. Stack front OH2–OPP–MB2; base front OH2–MB2–OPP, back OH1–L–S.",
+  "notes": "ConanLiuMD R2 (~6:52–9:18): front MB2+RS stack toward 3/2. Receive: S up/right out of the pass; OH2+L+OH1 pass.",
   "lineup": {
     "1": "OH1",
     "2": "MB2",
@@ -19,7 +19,7 @@
         {
           "id": "stack",
           "label": "Stack",
-          "cue": "Front MB2 + RS stack to reach base sooner (MB2→3, RS→2). OH2 is already near left front.",
+          "cue": "Serve stack front L→R: OH2 – Opposite – MB2. OH1 serves P1. S is middle-back, L left of S.",
           "positions": {
             "S": {
               "x": 0.7,
@@ -52,7 +52,7 @@
               "courtPos": 5
             },
             "MB2": {
-              "x": 0.66,
+              "x": 0.68,
               "y": 0.14,
               "role": "Middle",
               "courtPos": 2
@@ -101,7 +101,7 @@
               "courtPos": 5
             },
             "MB2": {
-              "x": 0.66,
+              "x": 0.68,
               "y": 0.14,
               "role": "Middle",
               "courtPos": 2
@@ -117,7 +117,7 @@
         {
           "id": "release",
           "label": "Release",
-          "cue": "After contact: MB2 to 3, RS to 2, OH1 enters left-back (5). S slides to 1, L to 6.",
+          "cue": "After contact: MB2 to middle, Opposite to right front, OH1 enters left-back. S slides to 1, L to 6.",
           "positions": {
             "S": {
               "x": 0.8,
@@ -132,7 +132,7 @@
               "courtPos": 3
             },
             "OH1": {
-              "x": 0.32,
+              "x": 0.28,
               "y": 0.8,
               "role": "Outside",
               "courtPos": 1
@@ -150,7 +150,7 @@
               "courtPos": 5
             },
             "MB2": {
-              "x": 0.52,
+              "x": 0.5,
               "y": 0.18,
               "role": "Middle",
               "courtPos": 2
@@ -166,25 +166,25 @@
         {
           "id": "base",
           "label": "Base",
-          "cue": "Base: front OH2@4, MB2@3, RS@2. Back OH1@5, L@6, S@1.",
+          "cue": "Base front L→R: OH2 – MB2 – Opposite. Back OH1–L–S.",
           "positions": {
             "S": {
               "x": 0.82,
               "y": 0.78,
               "role": "Setter",
-              "courtPos": 6
+              "courtPos": 1
             },
             "OPP": {
               "x": 0.82,
               "y": 0.2,
               "role": "Opposite",
-              "courtPos": 3
+              "courtPos": 2
             },
             "OH1": {
               "x": 0.2,
               "y": 0.78,
               "role": "Outside",
-              "courtPos": 1
+              "courtPos": 5
             },
             "OH2": {
               "x": 0.18,
@@ -196,19 +196,19 @@
               "x": 0.5,
               "y": 0.8,
               "role": "Middle",
-              "courtPos": 5
+              "courtPos": 6
             },
             "MB2": {
               "x": 0.5,
               "y": 0.18,
               "role": "Middle",
-              "courtPos": 2
+              "courtPos": 3
             },
             "L": {
               "x": 0.5,
               "y": 0.8,
               "role": "Libero",
-              "courtPos": 5
+              "courtPos": 6
             }
           }
         }
@@ -219,16 +219,16 @@
         {
           "id": "outsides-and-l",
           "name": "Outsides + L",
-          "description": "Shift MB2, S, and RS right (MB2 to the right sideline) so L and both outsides can pass.",
+          "description": "S starts up/right out of the pass. OH2, L, and OH1 pass.",
           "steps": [
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "MB2, S, and RS shift right — MB2 to the right sideline. Passers: L, OH1, OH2.",
+              "cue": "S is up and right, out of the pass. Passers: OH2, L, OH1. MB2 and RS shift right.",
               "positions": {
                 "S": {
-                  "x": 0.68,
-                  "y": 0.52,
+                  "x": 0.7,
+                  "y": 0.42,
                   "role": "Setter",
                   "courtPos": 6
                 },
@@ -273,25 +273,25 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "Ball is over — front to OH2@4, MB2@3, RS@2. S to the setting target.",
+              "cue": "Ball is over — front OH2–MB2–Opposite. S to the setting target.",
               "positions": {
                 "S": {
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 6
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
                   "y": 0.2,
                   "role": "Opposite",
-                  "courtPos": 3
+                  "courtPos": 2
                 },
                 "OH1": {
                   "x": 0.2,
                   "y": 0.78,
                   "role": "Outside",
-                  "courtPos": 1
+                  "courtPos": 5
                 },
                 "OH2": {
                   "x": 0.18,
@@ -303,19 +303,19 @@
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Middle",
-                  "courtPos": 5
+                  "courtPos": 6
                 },
                 "MB2": {
                   "x": 0.5,
                   "y": 0.18,
                   "role": "Middle",
-                  "courtPos": 2
+                  "courtPos": 3
                 },
                 "L": {
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Libero",
-                  "courtPos": 5
+                  "courtPos": 6
                 }
               }
             }
@@ -324,16 +324,16 @@
         {
           "id": "2-person",
           "name": "2-person",
-          "description": "L and OH1 take the pass so OH2 can stay on the left pin against a tough jump-float.",
+          "description": "L and OH1 take the pass so OH2 can stay on the left pin.",
           "steps": [
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "Two-person: L and OH1 pass. OH2 stays left front. Front still shaded right to stay legal.",
+              "cue": "Two-person: L and OH1 pass. OH2 stays left front. S still up/right.",
               "positions": {
                 "S": {
-                  "x": 0.66,
-                  "y": 0.5,
+                  "x": 0.68,
+                  "y": 0.4,
                   "role": "Setter",
                   "courtPos": 6
                 },
@@ -378,25 +378,25 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "Same base as the outsides + L look.",
+              "cue": "Same base as outsides + L.",
               "positions": {
                 "S": {
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 6
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
                   "y": 0.2,
                   "role": "Opposite",
-                  "courtPos": 3
+                  "courtPos": 2
                 },
                 "OH1": {
                   "x": 0.2,
                   "y": 0.78,
                   "role": "Outside",
-                  "courtPos": 1
+                  "courtPos": 5
                 },
                 "OH2": {
                   "x": 0.18,
@@ -408,19 +408,19 @@
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Middle",
-                  "courtPos": 5
+                  "courtPos": 6
                 },
                 "MB2": {
                   "x": 0.5,
                   "y": 0.18,
                   "role": "Middle",
-                  "courtPos": 2
+                  "courtPos": 3
                 },
                 "L": {
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Libero",
-                  "courtPos": 5
+                  "courtPos": 6
                 }
               }
             }
@@ -434,11 +434,11 @@
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "W: OH2 short left, L mid, OH1 deep right. MB2 / RS / S stay shifted right.",
+              "cue": "W: OH2 short left, L mid, OH1 deep right. S stays up/right out of the pass.",
               "positions": {
                 "S": {
-                  "x": 0.66,
-                  "y": 0.5,
+                  "x": 0.68,
+                  "y": 0.4,
                   "role": "Setter",
                   "courtPos": 6
                 },
@@ -483,25 +483,25 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "W folds into OH2–MB2–RS front and S at the target.",
+              "cue": "W folds into OH2–MB2–Opposite front and S at the target.",
               "positions": {
                 "S": {
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 6
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
                   "y": 0.2,
                   "role": "Opposite",
-                  "courtPos": 3
+                  "courtPos": 2
                 },
                 "OH1": {
                   "x": 0.2,
                   "y": 0.78,
                   "role": "Outside",
-                  "courtPos": 1
+                  "courtPos": 5
                 },
                 "OH2": {
                   "x": 0.18,
@@ -513,19 +513,19 @@
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Middle",
-                  "courtPos": 5
+                  "courtPos": 6
                 },
                 "MB2": {
                   "x": 0.5,
                   "y": 0.18,
                   "role": "Middle",
-                  "courtPos": 2
+                  "courtPos": 3
                 },
                 "L": {
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Libero",
-                  "courtPos": 5
+                  "courtPos": 6
                 }
               }
             }

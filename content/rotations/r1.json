@@ -2,8 +2,8 @@
   "id": "r1",
   "rotation": 1,
   "title": "Rotation 1 — Setter serve",
-  "summary": "S at P1 serving. Front-row attackers: RS/opposite (P4), MB2 (P3), OH1 (P2). L overlays MB1 in P6.",
-  "notes": "OH cover setter is the everyday receive: OH1 drops back so S can hide, then RS swings left on first ball. RS-cover tucks S closer to the setting spot.",
+  "summary": "S serves P1. Rotational: 1S 2OH1 3MB2 4OPP 5OH2 6MB1 (L overlays 6). Serve stack front OPP–MB2–OH1; after contact, base front OH1–MB2–OPP.",
+  "notes": "ConanLiuMD R1 (~4:06–6:50): pins stack Opposite left / OH1 right so they can switch to hitting sides after contact. Default receive: OH1 drops deep with OH2+L; S hidden right. Alternate: RS/OPP drops, S pushes up.",
   "lineup": {
     "1": "S",
     "2": "OH1",
@@ -19,7 +19,7 @@
         {
           "id": "stack",
           "label": "Stack",
-          "cue": "Front near mid-net: MB2 closest to the tape, RS and OH1 tucked beside. Stay legal until contact.",
+          "cue": "Serve stack front L→R: Opposite (RS) – MB2 – OH1. Back OH2–L, S serving P1. Stay legal until contact.",
           "positions": {
             "S": {
               "x": 0.82,
@@ -68,7 +68,7 @@
         {
           "id": "toss",
           "label": "Toss",
-          "cue": "S tosses from the endline at P1. Front row holds the mid-net stack.",
+          "cue": "S tosses from the P1 endline. Front holds the stack — RS still left, OH1 still right.",
           "positions": {
             "S": {
               "x": 0.82,
@@ -117,7 +117,7 @@
         {
           "id": "release",
           "label": "Release",
-          "cue": "Ball is served — release to base. RS to left front, OH1 to right front, MB2 stays middle.",
+          "cue": "After contact, pins switch to hitting sides: OH1 to left front (4), Opposite to right front (2). MB2 stays middle.",
           "positions": {
             "S": {
               "x": 0.82,
@@ -126,13 +126,13 @@
               "courtPos": 1
             },
             "OPP": {
-              "x": 0.24,
+              "x": 0.72,
               "y": 0.21,
               "role": "Opposite",
               "courtPos": 4
             },
             "OH1": {
-              "x": 0.76,
+              "x": 0.28,
               "y": 0.21,
               "role": "Outside",
               "courtPos": 2
@@ -166,7 +166,7 @@
         {
           "id": "base",
           "label": "Base",
-          "cue": "Base defense: S@1, OH1@2, MB2@3, RS@4, OH2@5, L/MB1@6.",
+          "cue": "Base defense front L→R: OH1 – MB2 – Opposite (OH left @4, Opp/RS right @2). Back OH2–L–S.",
           "positions": {
             "S": {
               "x": 0.82,
@@ -175,16 +175,16 @@
               "courtPos": 1
             },
             "OPP": {
-              "x": 0.18,
-              "y": 0.2,
-              "role": "Opposite",
-              "courtPos": 4
-            },
-            "OH1": {
               "x": 0.82,
               "y": 0.2,
-              "role": "Outside",
+              "role": "Opposite",
               "courtPos": 2
+            },
+            "OH1": {
+              "x": 0.18,
+              "y": 0.2,
+              "role": "Outside",
+              "courtPos": 4
             },
             "OH2": {
               "x": 0.2,
@@ -219,16 +219,16 @@
         {
           "id": "oh-cover-setter",
           "name": "OH cover S",
-          "description": "Everyday look: OH1 drops back to hide and cover S. Passers include OH1. RS swings left/outside on first ball; OH1 can hit the right side after.",
+          "description": "Default: OH1 drops deep to pass with OH2+L. S hides right. After the ball is over, pins go to hitting sides (OH left, Opp right).",
           "steps": [
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "OH1 drops back to cover S. S tucks behind OH1. Passers: OH1, OH2, L.",
+              "cue": "OH1 drops deep to pass with OH2 and L. S is hidden right, behind OH1.",
               "positions": {
                 "S": {
-                  "x": 0.78,
-                  "y": 0.62,
+                  "x": 0.8,
+                  "y": 0.64,
                   "role": "Setter",
                   "courtPos": 1
                 },
@@ -240,7 +240,7 @@
                 },
                 "OH1": {
                   "x": 0.66,
-                  "y": 0.46,
+                  "y": 0.52,
                   "role": "Outside",
                   "courtPos": 2
                 },
@@ -273,25 +273,25 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "Ball is over — RS hits left/outside on first ball. OH1 can swing right after. Everyone else to base.",
+              "cue": "Ball is over — OH1 to left pin, Opposite to right pin, S to the setting target.",
               "positions": {
                 "S": {
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 1
+                  "courtPos": 2
                 },
                 "OPP": {
-                  "x": 0.16,
-                  "y": 0.16,
-                  "role": "Opposite",
-                  "courtPos": 4
-                },
-                "OH1": {
                   "x": 0.82,
                   "y": 0.2,
-                  "role": "Outside",
+                  "role": "Opposite",
                   "courtPos": 2
+                },
+                "OH1": {
+                  "x": 0.18,
+                  "y": 0.2,
+                  "role": "Outside",
+                  "courtPos": 4
                 },
                 "OH2": {
                   "x": 0.2,
@@ -307,7 +307,7 @@
                 },
                 "MB2": {
                   "x": 0.5,
-                  "y": 0.16,
+                  "y": 0.18,
                   "role": "Middle",
                   "courtPos": 3
                 },
@@ -324,22 +324,22 @@
         {
           "id": "rs-cover",
           "name": "RS cover",
-          "description": "RS drops back so S can start closer to the setting spot instead of hiding deep behind OH1.",
+          "description": "Alternate: RS/OPP drops back to pass so S can push up closer to the setting spot.",
           "steps": [
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "RS drops back to cover. S starts closer to the setting spot, still behind OH1.",
+              "cue": "RS/Opposite drops back to pass. S pushes up toward the setting spot, still behind OH1.",
               "positions": {
                 "S": {
-                  "x": 0.72,
-                  "y": 0.38,
+                  "x": 0.7,
+                  "y": 0.36,
                   "role": "Setter",
                   "courtPos": 1
                 },
                 "OPP": {
                   "x": 0.28,
-                  "y": 0.48,
+                  "y": 0.5,
                   "role": "Opposite",
                   "courtPos": 4
                 },
@@ -378,25 +378,25 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "Ball is over — short moves to base. S finishes at the setting target.",
+              "cue": "Ball is over — short moves to hitting-side base. S finishes at the target.",
               "positions": {
                 "S": {
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 1
+                  "courtPos": 2
                 },
                 "OPP": {
-                  "x": 0.16,
-                  "y": 0.16,
-                  "role": "Opposite",
-                  "courtPos": 4
-                },
-                "OH1": {
                   "x": 0.82,
                   "y": 0.2,
-                  "role": "Outside",
+                  "role": "Opposite",
                   "courtPos": 2
+                },
+                "OH1": {
+                  "x": 0.18,
+                  "y": 0.2,
+                  "role": "Outside",
+                  "courtPos": 4
                 },
                 "OH2": {
                   "x": 0.2,
@@ -412,7 +412,7 @@
                 },
                 "MB2": {
                   "x": 0.5,
-                  "y": 0.16,
+                  "y": 0.18,
                   "role": "Middle",
                   "courtPos": 3
                 },
@@ -429,7 +429,7 @@
         {
           "id": "2-person",
           "name": "2-person",
-          "description": "Two platforms (L + OH2) so OH1 can stay on the right pin and RS stays on the left swing.",
+          "description": "Two platforms (L + OH2) so OH1 can stay on the right pin and RS stays off the seam.",
           "steps": [
             {
               "id": "platform",
@@ -483,25 +483,25 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "Same 5-1 attack shape — only the platform changed.",
+              "cue": "Same hitting-side 5-1 shape — only the platform changed.",
               "positions": {
                 "S": {
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 1
+                  "courtPos": 2
                 },
                 "OPP": {
-                  "x": 0.16,
-                  "y": 0.16,
-                  "role": "Opposite",
-                  "courtPos": 4
-                },
-                "OH1": {
                   "x": 0.82,
                   "y": 0.2,
-                  "role": "Outside",
+                  "role": "Opposite",
                   "courtPos": 2
+                },
+                "OH1": {
+                  "x": 0.18,
+                  "y": 0.2,
+                  "role": "Outside",
+                  "courtPos": 4
                 },
                 "OH2": {
                   "x": 0.2,
@@ -517,7 +517,7 @@
                 },
                 "MB2": {
                   "x": 0.5,
-                  "y": 0.16,
+                  "y": 0.18,
                   "role": "Middle",
                   "courtPos": 3
                 },
@@ -534,7 +534,7 @@
         {
           "id": "w-pass",
           "name": "W-pass",
-          "description": "Four-player W (two short, two deep) against a tough floater or short serve in this rotation.",
+          "description": "Four-player W (two short, two deep) against a tough floater or short serve.",
           "steps": [
             {
               "id": "platform",
@@ -588,25 +588,25 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "W folds into the standard 5-1 attack shape.",
+              "cue": "W folds into hitting-side base: OH1 left, Opposite right.",
               "positions": {
                 "S": {
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 1
+                  "courtPos": 2
                 },
                 "OPP": {
-                  "x": 0.16,
-                  "y": 0.16,
-                  "role": "Opposite",
-                  "courtPos": 4
-                },
-                "OH1": {
                   "x": 0.82,
                   "y": 0.2,
-                  "role": "Outside",
+                  "role": "Opposite",
                   "courtPos": 2
+                },
+                "OH1": {
+                  "x": 0.18,
+                  "y": 0.2,
+                  "role": "Outside",
+                  "courtPos": 4
                 },
                 "OH2": {
                   "x": 0.2,
@@ -622,7 +622,7 @@
                 },
                 "MB2": {
                   "x": 0.5,
-                  "y": 0.16,
+                  "y": 0.18,
                   "role": "Middle",
                   "courtPos": 3
                 },
