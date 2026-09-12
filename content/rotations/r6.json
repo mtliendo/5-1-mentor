@@ -2,8 +2,8 @@
   "id": "r6",
   "rotation": 6,
   "title": "Rotation 6 — Setter right front",
-  "summary": "S at P2 (right front). MB1 serves (L cannot serve this middle if already serving for MB2).",
-  "notes": "If L would be front, MB2 stays in. After the serve, L is back in for the middle. OH1 + MB2 ready to hit; back-row OH can pipe.",
+  "summary": "MB1 serves (L off). Rotational: 1MB1 2S 3OH1 4MB2 5OPP 6OH2. Stack MB2–OH1–S; base OH1–MB2–S, back OPP–OH2–MB1. L re-enters on receive.",
+  "notes": "ConanLiuMD R6: L cannot serve this middle. After the serve, L re-enters on receive. Default OH1+OH2+L; alternate RS passes with MB2+OH1 stacked left.",
   "lineup": {
     "1": "MB1",
     "2": "S",
@@ -19,7 +19,7 @@
         {
           "id": "stack",
           "label": "Stack",
-          "cue": "If L would be front, MB2 stays in. Front stacks so the middle/outside switch is easy (OH1→4, MB2→3). S already at 2.",
+          "cue": "MB1 serves (L off — L cannot serve this middle). Serve stack front L→R: MB2 – OH1 – S.",
           "positions": {
             "S": {
               "x": 0.82,
@@ -56,19 +56,13 @@
               "y": 0.18,
               "role": "Middle",
               "courtPos": 4
-            },
-            "L": {
-              "x": 0.88,
-              "y": 0.72,
-              "role": "Libero",
-              "courtPos": 1
             }
           }
         },
         {
           "id": "toss",
           "label": "Toss",
-          "cue": "MB1 tosses from the P1 endline. L cannot serve this middle if already serving for MB2.",
+          "cue": "MB1 tosses from the P1 endline. Front holds MB2–OH1–S.",
           "positions": {
             "S": {
               "x": 0.82,
@@ -105,19 +99,13 @@
               "y": 0.18,
               "role": "Middle",
               "courtPos": 4
-            },
-            "L": {
-              "x": 0.88,
-              "y": 0.72,
-              "role": "Libero",
-              "courtPos": 1
             }
           }
         },
         {
           "id": "release",
           "label": "Release",
-          "cue": "L back in for the middle. OH1 and MB2 finish the switch. Back-row OH can prepare to pipe.",
+          "cue": "After contact: OH1 to left, MB2 to middle, S stays right. Back becomes OPP–OH2–MB1.",
           "positions": {
             "S": {
               "x": 0.82,
@@ -132,14 +120,14 @@
               "courtPos": 5
             },
             "OH1": {
-              "x": 0.22,
+              "x": 0.26,
               "y": 0.2,
               "role": "Outside",
               "courtPos": 3
             },
             "OH2": {
-              "x": 0.72,
-              "y": 0.78,
+              "x": 0.5,
+              "y": 0.8,
               "role": "Outside",
               "courtPos": 6
             },
@@ -154,19 +142,13 @@
               "y": 0.18,
               "role": "Middle",
               "courtPos": 4
-            },
-            "L": {
-              "x": 0.5,
-              "y": 0.8,
-              "role": "Libero",
-              "courtPos": 1
             }
           }
         },
         {
           "id": "base",
           "label": "Base",
-          "cue": "Base: OH1@4, MB2@3, S@2. Back RS@5, L@6, OH2@1.",
+          "cue": "Base front L→R: OH1 – MB2 – S. Back OPP–OH2–MB1.",
           "positions": {
             "S": {
               "x": 0.82,
@@ -187,14 +169,14 @@
               "courtPos": 3
             },
             "OH2": {
-              "x": 0.82,
-              "y": 0.78,
+              "x": 0.5,
+              "y": 0.8,
               "role": "Outside",
               "courtPos": 6
             },
             "MB1": {
-              "x": 0.5,
-              "y": 0.8,
+              "x": 0.82,
+              "y": 0.78,
               "role": "Middle",
               "courtPos": 1
             },
@@ -203,12 +185,6 @@
               "y": 0.18,
               "role": "Middle",
               "courtPos": 4
-            },
-            "L": {
-              "x": 0.5,
-              "y": 0.8,
-              "role": "Libero",
-              "courtPos": 1
             }
           }
         }
@@ -219,12 +195,12 @@
         {
           "id": "l-in-middle",
           "name": "L in",
-          "description": "L is back in for the middle. OH1 and MB2 stay ready to hit; back-row OH can pipe. RS stays off the pass.",
+          "description": "L re-enters for the serving middle. OH1, OH2, and L pass.",
           "steps": [
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "L back in for the middle. Passers: L and OH2. OH1 + MB2 ready to hit; RS pulled off.",
+              "cue": "L re-enters. Passers: OH1, OH2, L. MB2 ready left; S already at right front.",
               "positions": {
                 "S": {
                   "x": 0.82,
@@ -233,20 +209,20 @@
                   "courtPos": 2
                 },
                 "OPP": {
-                  "x": 0.22,
+                  "x": 0.2,
                   "y": 0.56,
                   "role": "Opposite",
                   "courtPos": 5
                 },
                 "OH1": {
-                  "x": 0.5,
-                  "y": 0.18,
+                  "x": 0.36,
+                  "y": 0.42,
                   "role": "Outside",
                   "courtPos": 3
                 },
                 "OH2": {
-                  "x": 0.42,
-                  "y": 0.74,
+                  "x": 0.5,
+                  "y": 0.76,
                   "role": "Outside",
                   "courtPos": 6
                 },
@@ -258,13 +234,13 @@
                 },
                 "MB2": {
                   "x": 0.18,
-                  "y": 0.2,
+                  "y": 0.18,
                   "role": "Middle",
                   "courtPos": 4
                 },
                 "L": {
-                  "x": 0.7,
-                  "y": 0.72,
+                  "x": 0.68,
+                  "y": 0.7,
                   "role": "Libero",
                   "courtPos": 1
                 }
@@ -273,7 +249,7 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "After contact: OH1 and MB2 on their approaches. Back-row OH can pipe, then everyone to base.",
+              "cue": "After contact: OH1 and MB2 on their approaches. Back-row OH can pipe, then base.",
               "positions": {
                 "S": {
                   "x": 0.68,
@@ -300,8 +276,8 @@
                   "courtPos": 6
                 },
                 "MB1": {
-                  "x": 0.5,
-                  "y": 0.8,
+                  "x": 0.82,
+                  "y": 0.78,
                   "role": "Middle",
                   "courtPos": 1
                 },
@@ -313,7 +289,7 @@
                 },
                 "L": {
                   "x": 0.5,
-                  "y": 0.8,
+                  "y": 0.78,
                   "role": "Libero",
                   "courtPos": 1
                 }
@@ -324,12 +300,12 @@
         {
           "id": "rs-pass",
           "name": "RS pass",
-          "description": "RS/opposite joins the platform when the serve hunts the left-back seam.",
+          "description": "RS/Opposite passes. MB2 and OH1 stack left.",
           "steps": [
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "RS passes with L and OH2. Front OH1 + MB2 stay ready to hit.",
+              "cue": "MB2 + OH1 stack left. RS/Opposite drops to pass with OH2 and L.",
               "positions": {
                 "S": {
                   "x": 0.82,
@@ -338,19 +314,19 @@
                   "courtPos": 2
                 },
                 "OPP": {
-                  "x": 0.28,
+                  "x": 0.3,
                   "y": 0.72,
                   "role": "Opposite",
                   "courtPos": 5
                 },
                 "OH1": {
-                  "x": 0.5,
-                  "y": 0.18,
+                  "x": 0.32,
+                  "y": 0.2,
                   "role": "Outside",
                   "courtPos": 3
                 },
                 "OH2": {
-                  "x": 0.5,
+                  "x": 0.52,
                   "y": 0.76,
                   "role": "Outside",
                   "courtPos": 6
@@ -362,13 +338,13 @@
                   "courtPos": 1
                 },
                 "MB2": {
-                  "x": 0.18,
-                  "y": 0.2,
+                  "x": 0.16,
+                  "y": 0.16,
                   "role": "Middle",
                   "courtPos": 4
                 },
                 "L": {
-                  "x": 0.72,
+                  "x": 0.7,
                   "y": 0.7,
                   "role": "Libero",
                   "courtPos": 1
@@ -405,8 +381,8 @@
                   "courtPos": 6
                 },
                 "MB1": {
-                  "x": 0.5,
-                  "y": 0.8,
+                  "x": 0.82,
+                  "y": 0.78,
                   "role": "Middle",
                   "courtPos": 1
                 },
@@ -418,7 +394,7 @@
                 },
                 "L": {
                   "x": 0.5,
-                  "y": 0.8,
+                  "y": 0.78,
                   "role": "Libero",
                   "courtPos": 1
                 }
@@ -510,8 +486,8 @@
                   "courtPos": 6
                 },
                 "MB1": {
-                  "x": 0.5,
-                  "y": 0.8,
+                  "x": 0.82,
+                  "y": 0.78,
                   "role": "Middle",
                   "courtPos": 1
                 },
@@ -523,7 +499,7 @@
                 },
                 "L": {
                   "x": 0.5,
-                  "y": 0.8,
+                  "y": 0.78,
                   "role": "Libero",
                   "courtPos": 1
                 }

@@ -35,7 +35,7 @@ The UI runs without API keys; guests keep preferences and progress in `localStor
 
 ## Rotation content
 
-`content/rotations/r1.json`–`r6.json` encode Focus Otter’s taught 5-1. Coordinates are normalized (`x` left→right, `y` net→endline; net at top). R1 start lineup is `{1:S, 2:OH1, 3:MB2, 4:OPP, 5:OH2, 6:MB1}`; R2–R6 rotate clockwise. Regenerate with:
+`content/rotations/r1.json`–`r6.json` encode Focus Otter’s taught 5-1 from [ConanLiuMD](https://youtu.be/LkpmYtogPdw). Coordinates are normalized (`x` left→right, `y` net→endline; net at top). Rotational zones are the video’s per-rotation tables (not assumed clockwise from R1). Serve walks are **stack → toss → release → base**; pin stack spots are not automatically their base spots (R1 stack is Opposite–MB2–OH1, base is OH1–MB2–Opposite). Regenerate with:
 
 ```bash
 node scripts/generate-rotations.mjs

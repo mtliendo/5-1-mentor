@@ -2,13 +2,13 @@ import type { PassingAlternate } from "./types";
 
 export const PASSING_LOOK_HELP: Record<string, string> = {
   "oh-cover-setter":
-    "Everyday R1 look. OH1 drops back to hide and cover S so the setter can run a 5-1. RS swings left on first ball.",
+    "Everyday R1 look. OH1 drops deep to pass with OH2 and L so S can hide right. After the ball is over, OH1 takes left front and Opposite takes right front.",
   "rs-cover":
-    "RS drops back so S can start closer to the setting spot instead of hiding deep.",
+    "Alternate: RS/Opposite drops back to pass so S can push up closer to the setting spot.",
   "outsides-and-l":
     "Shift the middle, setter, and RS right. L and both outsides take the pass.",
   "s-push-up":
-    "S is back-left, far from the target. Push S up toward the net — still behind MB1 and left of OH1.",
+    "S starts middle-back in R3. Push S mid/front toward the net — still behind MB1 — while OH2, OH1, and L pass.",
   "oh2-drop":
     "S and MB1 shade left. RS stays back-right so OH2 can drop back and pass.",
   "oh1-drop":

@@ -2,8 +2,8 @@
   "id": "r5",
   "rotation": 5,
   "title": "Rotation 5 — Setter middle front",
-  "summary": "S at P3 (middle front). OH2 serves — optionally from the left side of the endline.",
-  "notes": "Easy serve: OH1 and the back row are already near base; only MB1 and S need a stack. Receive: OH1 drops and L covers RS, or let RS pass.",
+  "summary": "OH2 serves from the left endline. Rotational: 1OH2 2MB1 3S 4OH1 5MB2 6OPP. Front OH1–MB1–S; back OH2–L–OPP.",
+  "notes": "ConanLiuMD R5: OH2 may toss left of a typical P1 endline (stay right of P6). Receive: OH1+L+OH2 pass. Alternate: RS passes.",
   "lineup": {
     "1": "OH2",
     "2": "MB1",
@@ -19,16 +19,16 @@
         {
           "id": "stack",
           "label": "Stack",
-          "cue": "Front MB1 + S stack. OH1 and the back row (RS + L/middle) are already near base — easy walk to defense.",
+          "cue": "OH2 serves from the left endline (stay right of P6/Opposite). Front OH1 with S+MB1 stacked. Back already near OH2–L–OPP.",
           "positions": {
             "S": {
-              "x": 0.58,
+              "x": 0.48,
               "y": 0.16,
               "role": "Setter",
               "courtPos": 3
             },
             "OPP": {
-              "x": 0.42,
+              "x": 0.28,
               "y": 0.8,
               "role": "Opposite",
               "courtPos": 6
@@ -40,25 +40,25 @@
               "courtPos": 4
             },
             "OH2": {
-              "x": 0.52,
+              "x": 0.42,
               "y": 0.9,
               "role": "Outside",
               "courtPos": 1
             },
             "MB1": {
-              "x": 0.7,
+              "x": 0.66,
               "y": 0.16,
               "role": "Middle",
               "courtPos": 2
             },
             "MB2": {
-              "x": 0.22,
+              "x": 0.18,
               "y": 0.78,
               "role": "Middle",
               "courtPos": 5
             },
             "L": {
-              "x": 0.28,
+              "x": 0.22,
               "y": 0.8,
               "role": "Libero",
               "courtPos": 5
@@ -68,16 +68,16 @@
         {
           "id": "toss",
           "label": "Toss",
-          "cue": "OH2 tosses — optionally from the left side of the endline. Stay right of RS/P6 until contact.",
+          "cue": "OH2 tosses left-of-typical P1. Front holds; stay legal vs Opposite in P6.",
           "positions": {
             "S": {
-              "x": 0.58,
+              "x": 0.48,
               "y": 0.16,
               "role": "Setter",
               "courtPos": 3
             },
             "OPP": {
-              "x": 0.42,
+              "x": 0.28,
               "y": 0.8,
               "role": "Opposite",
               "courtPos": 6
@@ -89,25 +89,25 @@
               "courtPos": 4
             },
             "OH2": {
-              "x": 0.52,
+              "x": 0.42,
               "y": 0.94,
               "role": "Outside",
               "courtPos": 1
             },
             "MB1": {
-              "x": 0.7,
+              "x": 0.66,
               "y": 0.16,
               "role": "Middle",
               "courtPos": 2
             },
             "MB2": {
-              "x": 0.22,
+              "x": 0.18,
               "y": 0.78,
               "role": "Middle",
               "courtPos": 5
             },
             "L": {
-              "x": 0.28,
+              "x": 0.22,
               "y": 0.8,
               "role": "Libero",
               "courtPos": 5
@@ -117,7 +117,7 @@
         {
           "id": "release",
           "label": "Release",
-          "cue": "MB1 and S switch: S to 2, MB1 to 3. OH2 comes in at 1. L takes 6, RS to 5.",
+          "cue": "Front finishes OH1–MB1–S (S and MB1 may switch after contact). OH2 enters left-back; L to 6; Opposite to right-back.",
           "positions": {
             "S": {
               "x": 0.76,
@@ -126,7 +126,7 @@
               "courtPos": 3
             },
             "OPP": {
-              "x": 0.22,
+              "x": 0.8,
               "y": 0.78,
               "role": "Opposite",
               "courtPos": 6
@@ -138,7 +138,7 @@
               "courtPos": 4
             },
             "OH2": {
-              "x": 0.8,
+              "x": 0.24,
               "y": 0.8,
               "role": "Outside",
               "courtPos": 1
@@ -166,7 +166,7 @@
         {
           "id": "base",
           "label": "Base",
-          "cue": "Base: OH1@4, MB1@3, S@2. Back OH2@1, RS@5, L@6.",
+          "cue": "Base front L→R: OH1 – MB1 – S. Back OH2–L–Opposite.",
           "positions": {
             "S": {
               "x": 0.82,
@@ -175,7 +175,7 @@
               "courtPos": 3
             },
             "OPP": {
-              "x": 0.2,
+              "x": 0.82,
               "y": 0.78,
               "role": "Opposite",
               "courtPos": 6
@@ -187,7 +187,7 @@
               "courtPos": 4
             },
             "OH2": {
-              "x": 0.82,
+              "x": 0.2,
               "y": 0.78,
               "role": "Outside",
               "courtPos": 1
@@ -219,12 +219,12 @@
         {
           "id": "oh1-drop",
           "name": "OH1 drop",
-          "description": "OH1 drops back to pass. L covers RS so the opposite does not pass. Front is mostly an MB1/S switch.",
+          "description": "OH1, L, and OH2 pass. L covers so the opposite does not have to take the serve.",
           "steps": [
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "OH1 drops back to pass. L covers RS so the opposite doesn’t take the ball. Passers: OH1, L, OH2.",
+              "cue": "Passers: OH1, L, OH2. S and MB1 stay off the platform.",
               "positions": {
                 "S": {
                   "x": 0.48,
@@ -233,8 +233,8 @@
                   "courtPos": 3
                 },
                 "OPP": {
-                  "x": 0.68,
-                  "y": 0.58,
+                  "x": 0.64,
+                  "y": 0.62,
                   "role": "Opposite",
                   "courtPos": 6
                 },
@@ -245,7 +245,7 @@
                   "courtPos": 4
                 },
                 "OH2": {
-                  "x": 0.8,
+                  "x": 0.82,
                   "y": 0.78,
                   "role": "Outside",
                   "courtPos": 1
@@ -273,7 +273,7 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "Ball is over — front is mostly an MB1/S switch. Back is busier: OH2, RS, L to base.",
+              "cue": "Ball is over — front OH1–MB1–S. Back OH2–L–Opposite.",
               "positions": {
                 "S": {
                   "x": 0.68,
@@ -282,7 +282,7 @@
                   "courtPos": 3
                 },
                 "OPP": {
-                  "x": 0.2,
+                  "x": 0.82,
                   "y": 0.78,
                   "role": "Opposite",
                   "courtPos": 6
@@ -294,7 +294,7 @@
                   "courtPos": 4
                 },
                 "OH2": {
-                  "x": 0.82,
+                  "x": 0.2,
                   "y": 0.78,
                   "role": "Outside",
                   "courtPos": 1
@@ -329,7 +329,7 @@
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "RS passes with L (and OH2 if needed). OH1 stays left front to hit.",
+              "cue": "RS/Opposite passes with L (and OH2 if needed). OH1 stays left front to hit.",
               "positions": {
                 "S": {
                   "x": 0.48,
@@ -378,7 +378,7 @@
             {
               "id": "base",
               "label": "Base",
-              "cue": "Same R5 base — S and MB1 finish their switch.",
+              "cue": "Same R5 base — S and MB1 finish at 2 and 3.",
               "positions": {
                 "S": {
                   "x": 0.68,
@@ -387,7 +387,7 @@
                   "courtPos": 3
                 },
                 "OPP": {
-                  "x": 0.2,
+                  "x": 0.82,
                   "y": 0.78,
                   "role": "Opposite",
                   "courtPos": 6
@@ -399,7 +399,7 @@
                   "courtPos": 4
                 },
                 "OH2": {
-                  "x": 0.82,
+                  "x": 0.2,
                   "y": 0.78,
                   "role": "Outside",
                   "courtPos": 1
@@ -429,12 +429,12 @@
         {
           "id": "2-person",
           "name": "2-person",
-          "description": "L and OH1 only. RS stays off the platform; OH2 can stay deeper.",
+          "description": "L and OH1 only. RS stays off the platform.",
           "steps": [
             {
               "id": "platform",
               "label": "Platform",
-              "cue": "Two-person: OH1 and L. L still covers RS.",
+              "cue": "Two-person: OH1 and L. Opposite stays off.",
               "positions": {
                 "S": {
                   "x": 0.48,
@@ -443,8 +443,8 @@
                   "courtPos": 3
                 },
                 "OPP": {
-                  "x": 0.7,
-                  "y": 0.56,
+                  "x": 0.78,
+                  "y": 0.58,
                   "role": "Opposite",
                   "courtPos": 6
                 },
@@ -492,7 +492,7 @@
                   "courtPos": 3
                 },
                 "OPP": {
-                  "x": 0.2,
+                  "x": 0.82,
                   "y": 0.78,
                   "role": "Opposite",
                   "courtPos": 6
@@ -504,7 +504,7 @@
                   "courtPos": 4
                 },
                 "OH2": {
-                  "x": 0.82,
+                  "x": 0.2,
                   "y": 0.78,
                   "role": "Outside",
                   "courtPos": 1
