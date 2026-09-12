@@ -24,7 +24,7 @@ export function listPassingAlternates(
 }
 
 export function defaultPassingId(rotation: RotationContent): string {
-  return listPassingAlternates(rotation)[0]?.id ?? "3-person";
+  return listPassingAlternates(rotation)[0]?.id ?? "oh-cover-setter";
 }
 
 export function getActiveSteps(

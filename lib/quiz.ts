@@ -58,7 +58,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: "q6",
-    prompt: "Which mode uses the named passing alternates (3-person, 2-person, W-pass)?",
+    prompt: "Which mode uses the named passing alternates (OH cover S, RS cover, 2-person)?",
     choices: [
       { id: "a", label: "Serve only" },
       { id: "b", label: "Serve-receive" },

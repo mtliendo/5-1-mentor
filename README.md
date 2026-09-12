@@ -22,20 +22,20 @@ The UI runs without API keys; guests keep preferences and progress in `localStor
 
 - TypeScript App Router + Tailwind UI (original gym / playbook look)
 - Half court, net at top; chips read `Name · Role`
-- Rotation 1–6, serve | serve-receive, named passing looks (3-person, 2-person, W-pass)
+- Rotation 1–6, serve | serve-receive, named passing looks (OH cover S, RS cover, 2-person, W-pass, and per-rotation coach looks)
 - Libero on/off — **off maps L to back-row middle**
 - Play-all + step/reset, optional overlap overlay
 - Guided lessons, free Explore, multiple-choice Quiz
 - `prefers-reduced-motion` (no chip easing; play-all still steps)
-- `content/rotations/r1.json`–`r6.json` stubs (see TODO below)
+- `content/rotations/r1.json`–`r6.json` — Focus Otter 5-1 (stack → toss → release → base; named receive looks)
 - Auth0 v4 login (`/auth/login`, callback `/auth/callback`) — email + Google
 - Signed-in prefs/progress at `/api/me/*`; guests stay on `localStorage`
 - Signed-in **Share lineup** (names + libero) via `/share/{token}` import
 - Legacy `/api/progress` is a thin compatibility stub only
 
-## Content TODO
+## Rotation content
 
-Coordinates in `content/rotations/` are normalized stubs (`x` left→right, `y` net→endline). Replace them with film-traced or coach-approved spots. Regenerate the six files with:
+`content/rotations/r1.json`–`r6.json` encode Focus Otter’s taught 5-1. Coordinates are normalized (`x` left→right, `y` net→endline; net at top). R1 start lineup is `{1:S, 2:OH1, 3:MB2, 4:OPP, 5:OH2, 6:MB1}`; R2–R6 rotate clockwise. Regenerate with:
 
 ```bash
 node scripts/generate-rotations.mjs

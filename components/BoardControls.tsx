@@ -120,7 +120,15 @@ export function BoardControls({
           <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-accent">
             Passing look
           </p>
-          <div className="grid grid-cols-3 gap-1">
+          <div
+            className={`grid gap-1 ${
+              passingAlternates.length <= 2
+                ? "grid-cols-2"
+                : passingAlternates.length === 3
+                  ? "grid-cols-3"
+                  : "grid-cols-2"
+            }`}
+          >
             {passingAlternates.map((look) => (
               <SegButton
                 key={look.id}
