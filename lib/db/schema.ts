@@ -8,7 +8,14 @@ import {
   smallint,
   text,
   timestamp,
+  uuid,
 } from "drizzle-orm/pg-core";
+
+/** Snapshot stored on a share link — custom names + libero only. No court layout. */
+export type FormationSharePayload = {
+  roleNames: Record<string, unknown>;
+  liberoEnabled: boolean;
+};
 
 /**
  * Matches the existing Neon tables on project dark-mouse-52869701.
@@ -69,6 +76,23 @@ export const userProgress = pgTable(
   ],
 );
 
+export const formationShares = pgTable("formation_shares", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  token: text("token").notNull().unique(),
+  ownerUserId: text("owner_user_id")
+    .notNull()
+    .references(() => appUsers.id, { onDelete: "cascade" }),
+  payload: jsonb("payload").$type<FormationSharePayload>().notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "date" })
+    .notNull()
+    .defaultNow(),
+  expiresAt: timestamp("expires_at", { withTimezone: true, mode: "date" })
+    .notNull()
+    .default(sql`(now() + interval '30 days')`),
+  revokedAt: timestamp("revoked_at", { withTimezone: true, mode: "date" }),
+});
+
 export type AppUser = typeof appUsers.$inferSelect;
 export type UserPreferences = typeof userPreferences.$inferSelect;
 export type UserProgress = typeof userProgress.$inferSelect;
+export type FormationShare = typeof formationShares.$inferSelect;
