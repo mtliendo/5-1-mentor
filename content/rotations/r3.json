@@ -172,7 +172,7 @@
               "x": 0.82,
               "y": 0.78,
               "role": "Setter",
-              "courtPos": 6
+              "courtPos": 1
             },
             "OPP": {
               "x": 0.82,
@@ -202,13 +202,13 @@
               "x": 0.5,
               "y": 0.8,
               "role": "Middle",
-              "courtPos": 1
+              "courtPos": 6
             },
             "L": {
               "x": 0.5,
               "y": 0.8,
               "role": "Libero",
-              "courtPos": 1
+              "courtPos": 6
             }
           }
         }
@@ -279,7 +279,7 @@
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 6
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
@@ -309,13 +309,13 @@
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Middle",
-                  "courtPos": 1
+                  "courtPos": 6
                 },
                 "L": {
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Libero",
-                  "courtPos": 1
+                  "courtPos": 6
                 }
               }
             }
@@ -384,7 +384,7 @@
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 6
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
@@ -414,13 +414,13 @@
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Middle",
-                  "courtPos": 1
+                  "courtPos": 6
                 },
                 "L": {
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Libero",
-                  "courtPos": 1
+                  "courtPos": 6
                 }
               }
             }
@@ -489,7 +489,7 @@
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 6
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
@@ -519,13 +519,13 @@
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Middle",
-                  "courtPos": 1
+                  "courtPos": 6
                 },
                 "L": {
                   "x": 0.5,
                   "y": 0.8,
                   "role": "Libero",
-                  "courtPos": 1
+                  "courtPos": 6
                 }
               }
             }

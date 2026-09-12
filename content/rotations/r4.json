@@ -172,7 +172,7 @@
               "x": 0.82,
               "y": 0.2,
               "role": "Setter",
-              "courtPos": 4
+              "courtPos": 2
             },
             "OPP": {
               "x": 0.82,
@@ -190,13 +190,13 @@
               "x": 0.18,
               "y": 0.2,
               "role": "Outside",
-              "courtPos": 3
+              "courtPos": 4
             },
             "MB1": {
               "x": 0.5,
               "y": 0.18,
               "role": "Middle",
-              "courtPos": 2
+              "courtPos": 3
             },
             "MB2": {
               "x": 0.5,
@@ -279,7 +279,7 @@
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 4
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
@@ -297,13 +297,13 @@
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 3
+                  "courtPos": 4
                 },
                 "MB1": {
                   "x": 0.5,
                   "y": 0.18,
                   "role": "Middle",
-                  "courtPos": 2
+                  "courtPos": 3
                 },
                 "MB2": {
                   "x": 0.5,
@@ -384,7 +384,7 @@
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 4
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
@@ -402,13 +402,13 @@
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 3
+                  "courtPos": 4
                 },
                 "MB1": {
                   "x": 0.5,
                   "y": 0.18,
                   "role": "Middle",
-                  "courtPos": 2
+                  "courtPos": 3
                 },
                 "MB2": {
                   "x": 0.5,
@@ -489,7 +489,7 @@
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 4
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
@@ -507,13 +507,13 @@
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 3
+                  "courtPos": 4
                 },
                 "MB1": {
                   "x": 0.5,
                   "y": 0.18,
                   "role": "Middle",
-                  "courtPos": 2
+                  "courtPos": 3
                 },
                 "MB2": {
                   "x": 0.5,

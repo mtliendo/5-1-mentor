@@ -178,13 +178,13 @@
               "x": 0.82,
               "y": 0.2,
               "role": "Opposite",
-              "courtPos": 4
+              "courtPos": 2
             },
             "OH1": {
               "x": 0.18,
               "y": 0.2,
               "role": "Outside",
-              "courtPos": 2
+              "courtPos": 4
             },
             "OH2": {
               "x": 0.2,
@@ -279,19 +279,19 @@
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 1
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
                   "y": 0.2,
                   "role": "Opposite",
-                  "courtPos": 4
+                  "courtPos": 2
                 },
                 "OH1": {
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 2
+                  "courtPos": 4
                 },
                 "OH2": {
                   "x": 0.2,
@@ -384,19 +384,19 @@
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 1
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
                   "y": 0.2,
                   "role": "Opposite",
-                  "courtPos": 4
+                  "courtPos": 2
                 },
                 "OH1": {
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 2
+                  "courtPos": 4
                 },
                 "OH2": {
                   "x": 0.2,
@@ -489,19 +489,19 @@
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 1
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
                   "y": 0.2,
                   "role": "Opposite",
-                  "courtPos": 4
+                  "courtPos": 2
                 },
                 "OH1": {
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 2
+                  "courtPos": 4
                 },
                 "OH2": {
                   "x": 0.2,
@@ -594,19 +594,19 @@
                   "x": 0.68,
                   "y": 0.16,
                   "role": "Setter",
-                  "courtPos": 1
+                  "courtPos": 2
                 },
                 "OPP": {
                   "x": 0.82,
                   "y": 0.2,
                   "role": "Opposite",
-                  "courtPos": 4
+                  "courtPos": 2
                 },
                 "OH1": {
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 2
+                  "courtPos": 4
                 },
                 "OH2": {
                   "x": 0.2,

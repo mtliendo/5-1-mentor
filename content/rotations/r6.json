@@ -166,7 +166,7 @@
               "x": 0.18,
               "y": 0.2,
               "role": "Outside",
-              "courtPos": 3
+              "courtPos": 4
             },
             "OH2": {
               "x": 0.5,
@@ -184,7 +184,7 @@
               "x": 0.5,
               "y": 0.18,
               "role": "Middle",
-              "courtPos": 4
+              "courtPos": 3
             }
           }
         }
@@ -267,7 +267,7 @@
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 3
+                  "courtPos": 4
                 },
                 "OH2": {
                   "x": 0.5,
@@ -285,13 +285,13 @@
                   "x": 0.5,
                   "y": 0.18,
                   "role": "Middle",
-                  "courtPos": 4
+                  "courtPos": 3
                 },
                 "L": {
                   "x": 0.5,
                   "y": 0.78,
                   "role": "Libero",
-                  "courtPos": 1
+                  "courtPos": 6
                 }
               }
             }
@@ -372,7 +372,7 @@
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 3
+                  "courtPos": 4
                 },
                 "OH2": {
                   "x": 0.5,
@@ -390,13 +390,13 @@
                   "x": 0.5,
                   "y": 0.18,
                   "role": "Middle",
-                  "courtPos": 4
+                  "courtPos": 3
                 },
                 "L": {
                   "x": 0.5,
                   "y": 0.78,
                   "role": "Libero",
-                  "courtPos": 1
+                  "courtPos": 6
                 }
               }
             }
@@ -477,7 +477,7 @@
                   "x": 0.18,
                   "y": 0.2,
                   "role": "Outside",
-                  "courtPos": 3
+                  "courtPos": 4
                 },
                 "OH2": {
                   "x": 0.5,
@@ -495,13 +495,13 @@
                   "x": 0.5,
                   "y": 0.18,
                   "role": "Middle",
-                  "courtPos": 4
+                  "courtPos": 3
                 },
                 "L": {
                   "x": 0.5,
                   "y": 0.78,
                   "role": "Libero",
-                  "courtPos": 1
+                  "courtPos": 6
                 }
               }
             }

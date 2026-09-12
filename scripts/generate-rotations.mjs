@@ -4,13 +4,13 @@
  *
  * Half-court, net at TOP. Normalized 0–1: x left→right, y net→endline.
  * Official rotational zones are the per-rotation VIDEO tables (not assumed
- * clockwise from a single START). Stack (legal at contact) and base
- * (hitting-side defense after the ball is over) are independent — do not
- * assume a pin’s stack courtPos equals their base spot.
+ * clockwise from a single START). Stack (legal at contact) keeps rotational
+ * courtPos. Base (hitting-side defense after the ball is over) sets courtPos
+ * to the defensive zone the player occupies — pins may switch (R1 OH1→4, OPP→2).
  *
  * PlayerId OPP = RS / opposite. Cues may say Opposite or RS.
  */
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -27,17 +27,18 @@ const ROLES = {
   L: "Libero",
 };
 
-/** Physical hitting-side / zone anchors (not automatically a player’s rotational home). */
+/** Physical hitting-side anchors: [x, y, courtPos]. Using SPOT[n] stamps that zone. */
 const SPOT = {
-  1: [0.82, 0.78],
-  2: [0.82, 0.2],
-  3: [0.5, 0.18],
-  4: [0.18, 0.2],
-  5: [0.2, 0.78],
-  6: [0.5, 0.8],
+  1: [0.82, 0.78, 1],
+  2: [0.82, 0.2, 2],
+  3: [0.5, 0.18, 3],
+  4: [0.18, 0.2, 4],
+  5: [0.2, 0.78, 5],
+  6: [0.5, 0.8, 6],
 };
 
-const SET = [0.68, 0.16];
+/** Setter target after the ball is over — physical right-front / zone 2. */
+const SET = [0.68, 0.16, 2];
 
 /**
  * Video rotational zone lists (R1 ~4:06, R2 ~6:52, R3 ~9:19, then R4–R6).
@@ -101,7 +102,11 @@ function clamp(n) {
   return Math.round(Math.min(0.96, Math.max(0.06, n)) * 100) / 100;
 }
 
-/** Absolute placements. `coords` is PlayerId → [x, y]. L may be omitted (R6 serve). */
+/**
+ * Absolute placements. `coords` is PlayerId → [x, y] or [x, y, courtPos].
+ * Third value overrides rotational courtPos (used on base after pin switch).
+ * L may be omitted (R6 serve).
+ */
 function placements(lineup, coords, backId) {
   const byId = invertLineup(lineup);
   const positions = {};
@@ -114,7 +119,7 @@ function placements(lineup, coords, backId) {
       x: clamp(pair[0]),
       y: clamp(pair[1]),
       role: ROLES[id],
-      courtPos: byId[id],
+      courtPos: pair[2] ?? byId[id],
     };
   }
   if (coords.L) {
@@ -122,7 +127,7 @@ function placements(lineup, coords, backId) {
       x: clamp(coords.L[0]),
       y: clamp(coords.L[1]),
       role: ROLES.L,
-      courtPos: byId[backId],
+      courtPos: coords.L[2] ?? byId[backId],
     };
   }
   return positions;
@@ -901,9 +906,9 @@ function r6Receive(lineup, backId) {
     OH1: SPOT[4],
     MB2: SPOT[3],
     OPP: SPOT[5],
-    OH2: [0.5, 0.62],
+    OH2: [0.5, 0.62, 6],
     MB1: SPOT[1],
-    L: [0.5, 0.78],
+    L: [0.5, 0.78, 6],
   };
   return [
     alternate(
@@ -1031,5 +1036,17 @@ for (let n = 1; n <= 6; n += 1) {
     `stackFront=${frontLeftToRight(stack.positions).join("-")}`,
     `baseFront=${frontLeftToRight(base.positions).join("-")}`,
     `alts=${rotation.modes["serve-receive"].passingAlternates.map((a) => a.id).join(",")}`,
+  );
+}
+
+const r1 = JSON.parse(readFileSync(join(OUT, "r1.json"), "utf8"));
+const r1Stack = r1.modes.serve.steps.find((s) => s.id === "stack").positions;
+const r1Base = r1.modes.serve.steps.find((s) => s.id === "base").positions;
+console.log("R1 stack vs base OH1/OPP:");
+for (const id of ["OH1", "OPP"]) {
+  const s = r1Stack[id];
+  const b = r1Base[id];
+  console.log(
+    `  ${id}  stack courtPos=${s.courtPos} x=${s.x}  |  base courtPos=${b.courtPos} x=${b.x}`,
   );
 }
