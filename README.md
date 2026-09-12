@@ -109,7 +109,7 @@ Session routes are mounted by `proxy.ts` (Next.js 16 network boundary) using the
 - `POST` `/api/me/shares/{token}/import` (auth) → overwrites and returns `{ liberoEnabled, roleNames }`
 - `DELETE` `/api/me/shares/{token}` (auth, owner) → soft-revoke (`revoked_at`); `{ ok: true }` or 204; 403 if not the owner
 
-The Share lineup UI calls those routes (this PR stacks on Backend PR #4). Apply `drizzle/0001_formation_shares.sql` before create/import will persist. If a route or the table is missing, the UI shows a graceful error instead of crashing.
+The Share lineup UI calls those routes (now on `main` via PR #4; `formation_shares` is live on Neon). If a route is missing on an older deploy, the UI shows a graceful error instead of crashing.
 
 Until Auth0 + Neon env vars exist, the homepage guest session is local and quiz/guided progress stays in the browser.
 
@@ -128,7 +128,6 @@ Until Auth0 + Neon env vars exist, the homepage guest session is local and quiz/
 1. Sign in (header **Sign in** or home Email / Google).
 2. Explore: under **Name your lineup**, edit a name and set libero on/off. **Share lineup** should be obvious. Tap it.
 3. **Share lineup** creates a copyable `/share/{token}` link. Copy it. Optional **Revoke** invalidates the link.
-   If share APIs or `formation_shares` are missing on this deploy: the control stays visible and shows a graceful error.
 4. Open the link signed out (incognito or after **Sign out**). Preview shows names + libero. **Sign in** should return to `/share/{token}`.
 5. Signed in on the share page: **Import to my account** → confirmation → **Open Explore** / **Home**. Explore should show the imported names and libero.
 6. Confirm chips still read `Name · Role`. Formations in `content/rotations/` are unchanged.
