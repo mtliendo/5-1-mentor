@@ -30,6 +30,7 @@ The UI runs without API keys; guests keep preferences and progress in `localStor
 - `content/rotations/r1.json`–`r6.json` stubs (see TODO below)
 - Auth0 v4 login (`/auth/login`, callback `/auth/callback`) — email + Google
 - Signed-in prefs/progress at `/api/me/*`; guests stay on `localStorage`
+- Signed-in **Share lineup** (names + libero) via `/share/{token}` import
 - Legacy `/api/progress` is a thin compatibility stub only
 
 ## Content TODO
@@ -106,7 +107,9 @@ Session routes are mounted by `proxy.ts` (Next.js 16 network boundary) using the
 - `POST` `/api/me/shares` (auth) → `{ token, url }` — `url` is `{APP_BASE_URL}/share/{token}` (FE page `app/share/[token]`; prod example: `https://5-1-mentor.vercel.app/share/{token}`). Optional extra: `expiresAt`
 - `GET` `/api/shares/{token}` (public preview) → `{ roleNames, liberoEnabled }` — 404 if missing, revoked, or expired; no owner PII. Optional extra: `expiresAt`
 - `POST` `/api/me/shares/{token}/import` (auth) → overwrites and returns `{ liberoEnabled, roleNames }`
-- `DELETE` `/api/me/shares/{token}` (auth, owner) → soft-revoke (`revoked_at`); `{ ok: true }`; 403 if not the owner
+- `DELETE` `/api/me/shares/{token}` (auth, owner) → soft-revoke (`revoked_at`); `{ ok: true }` or 204; 403 if not the owner
+
+The Share lineup UI calls those routes (now on `main` via PR #4; `formation_shares` is live on Neon). If a route is missing on an older deploy, the UI shows a graceful error instead of crashing.
 
 Until Auth0 + Neon env vars exist, the homepage guest session is local and quiz/guided progress stays in the browser.
 
@@ -119,3 +122,12 @@ Until Auth0 + Neon env vars exist, the homepage guest session is local and quiz/
 5. Quiz: finish a run, reload — best score persists.
 6. Sign out — guest mode uses `localStorage` only; `/api/me/*` returns 401.
 7. Desktop: Explore should show court and rotation/mode controls in one viewport (no scroll ping-pong). Passing looks show coach-language help.
+
+### Test share lineup (names + libero)
+
+1. Sign in (header **Sign in** or home Email / Google).
+2. Explore: under **Name your lineup**, edit a name and set libero on/off. **Share lineup** should be obvious. Tap it.
+3. **Share lineup** creates a copyable `/share/{token}` link. Copy it. Optional **Revoke** invalidates the link.
+4. Open the link signed out (incognito or after **Sign out**). Preview shows names + libero. **Sign in** should return to `/share/{token}`.
+5. Signed in on the share page: **Import to my account** → confirmation → **Open Explore** / **Home**. Explore should show the imported names and libero.
+6. Confirm chips still read `Name · Role`. Formations in `content/rotations/` are unchanged.
